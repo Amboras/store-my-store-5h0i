@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { hasAnalyticsConsent } from '@/lib/cookie-consent'
+import { getConsent, hasAnalyticsConsent } from '@/lib/cookie-consent'
 import {
   fetchMetaPixelConfig,
   getMetaPixelConfig,
@@ -14,6 +14,26 @@ import {
 export function MetaPixelProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const [isInitialized, setIsInitialized] = useState(false)
+  const [consentVersion, setConsentVersion] = useState<string | null>(() => getConsent()?.ts ?? null)
+
+  useEffect(() => {
+    const syncConsent = () => {
+      const nextConsentVersion = getConsent()?.ts ?? null
+      setConsentVersion((prev) => (prev === nextConsentVersion ? prev : nextConsentVersion))
+    }
+
+    window.addEventListener('focus', syncConsent)
+    document.addEventListener('visibilitychange', syncConsent)
+    window.addEventListener('storage', syncConsent)
+    window.addEventListener('amboras-consent-changed', syncConsent)
+
+    return () => {
+      window.removeEventListener('focus', syncConsent)
+      document.removeEventListener('visibilitychange', syncConsent)
+      window.removeEventListener('storage', syncConsent)
+      window.removeEventListener('amboras-consent-changed', syncConsent)
+    }
+  }, [])
 
   useEffect(() => {
     let isMounted = true
@@ -21,6 +41,7 @@ export function MetaPixelProvider({ children }: { children: React.ReactNode }) {
 
     const bootstrap = async () => {
       if (!hasAnalyticsConsent()) {
+        if (isMounted) setIsInitialized(false)
         return
       }
 
@@ -32,13 +53,17 @@ export function MetaPixelProvider({ children }: { children: React.ReactNode }) {
 
       try {
         const config = await fetchMetaPixelConfig()
-        if (!config) return
+        if (!config) {
+          if (isMounted) setIsInitialized(false)
+          return
+        }
 
         const ready = initMetaPixel(config)
-        if (ready && isMounted) {
-          setIsInitialized(true)
+        if (isMounted) {
+          setIsInitialized(ready)
         }
       } catch {
+        if (isMounted) setIsInitialized(false)
         // Meta pixel should never break the storefront experience
       }
     }
@@ -52,14 +77,14 @@ export function MetaPixelProvider({ children }: { children: React.ReactNode }) {
       isMounted = false
       unsubscribe()
     }
-  }, [])
+  }, [consentVersion])
 
   useEffect(() => {
     if (!hasAnalyticsConsent()) return
     if (!isInitialized) return
 
     trackMetaPageView(pathname)
-  }, [isInitialized, pathname])
+  }, [consentVersion, isInitialized, pathname])
 
   return <>{children}</>
 }

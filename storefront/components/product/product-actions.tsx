@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { useCart } from '@/hooks/use-cart'
 import { Minus, Plus, Check, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
@@ -22,8 +22,8 @@ function getVariantPriceAmount(variant: any): number | null {
 }
 
 export default function ProductActions({ product, variantExtensions }: ProductActionsProps) {
-  const variants = product.variants || []
-  const options = product.options || []
+  const variants = useMemo(() => product.variants || [], [product.variants])
+  const options = useMemo(() => product.options || [], [product.options])
 
   // Track selected value per option: { "opt_xxx": "S", "opt_yyy": "Black" }
   const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>(() => {
