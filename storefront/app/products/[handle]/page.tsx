@@ -1,17 +1,85 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-
-export const revalidate = 3600 // ISR: revalidate every hour
-import { medusaServerClient } from '@/lib/medusa-client'
-import Image from 'next/image'
 import Link from 'next/link'
-import { Truck, RotateCcw, Shield, ChevronRight } from 'lucide-react'
+import { ChevronRight, Star, CheckCircle2, Truck, RotateCcw, ShieldCheck, ChevronDown, ChevronUp } from 'lucide-react'
+import { medusaServerClient } from '@/lib/medusa-client'
 import ProductActions from '@/components/product/product-actions'
-import ProductAccordion from '@/components/product/product-accordion'
 import { ProductViewTracker } from '@/components/product/product-view-tracker'
-import { getProductPlaceholder } from '@/lib/utils/placeholder-images'
 import { type VariantExtension } from '@/components/product/product-price'
+import DinkraProductDetail from '@/components/product/dinkra-product-detail'
 
+export const revalidate = 3600
+
+/* ─── Kit static data ────────────────────────────────────────────── */
+const KIT_DATA: Record<string, {
+  badge: string
+  badgeColor: string
+  tagline: string
+  saveAmount: number
+  comparePrice: number
+  checklist: string[]
+  otherKits: string[]
+}> = {
+  'starter-kit': {
+    badge: 'Best Seller',
+    badgeColor: 'bg-dinkra-gold text-dinkra-ink',
+    tagline: 'Your first step on the court.',
+    saveAmount: 15,
+    comparePrice: 59,
+    checklist: [
+      '1× Fiberglass composite paddle (USAPA-approved, PP honeycomb core, 7.5–8.2 oz)',
+      '4× Outdoor pickleballs (USAPA-approved)',
+      '1× Replacement grip tape (cushioned, sweat-resistant)',
+      '1× Dinkra branded drawstring bag',
+      '1× Quick-start rules card',
+    ],
+    otherKits: ['rally-kit', 'gift-kit'],
+  },
+  'rally-kit': {
+    badge: 'Most Popular',
+    badgeColor: 'bg-dinkra-green text-white',
+    tagline: 'Everything for two players, ready to go.',
+    saveAmount: 20,
+    comparePrice: 99,
+    checklist: [
+      '2× Fiberglass composite paddles (USAPA-approved)',
+      '6× Outdoor pickleballs (USAPA-approved)',
+      '2× Replacement grip tape',
+      '1× Premium Dinkra zip bag',
+      '1× Quick-start rules card',
+    ],
+    otherKits: ['starter-kit', 'gift-kit'],
+  },
+  'gift-kit': {
+    badge: 'Gift Ready',
+    badgeColor: 'bg-dinkra-gold text-dinkra-ink',
+    tagline: 'The perfect gift for anyone active.',
+    saveAmount: 25,
+    comparePrice: 119,
+    checklist: [
+      '1× Fiberglass composite paddle (USAPA-approved)',
+      '4× Outdoor pickleballs (USAPA-approved)',
+      '1× Replacement grip tape',
+      '1× Premium gift box with ribbon',
+      '1× Handwritten gift card slot',
+    ],
+    otherKits: ['starter-kit', 'rally-kit'],
+  },
+}
+
+const KIT_NAMES: Record<string, string> = {
+  'starter-kit': 'Starter Kit',
+  'rally-kit':   'Rally Kit',
+  'gift-kit':    'Gift Kit',
+}
+
+const KIT_PRICES: Record<string, number> = {
+  'starter-kit': 44,
+  'rally-kit':   79,
+  'gift-kit':    94,
+}
+
+/* ─── Data fetchers ──────────────────────────────────────────────── */
 async function getProduct(handle: string) {
   try {
     const regionsResponse = await medusaServerClient.store.region.list()
@@ -24,8 +92,7 @@ async function getProduct(handle: string) {
       fields: '*variants.calculated_price',
     })
     return response.products?.[0] || null
-  } catch (error) {
-    console.error('Error fetching product:', error)
+  } catch {
     return null
   }
 }
@@ -67,22 +134,17 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { handle } = await params
   const product = await getProduct(handle)
-
-  if (!product) {
-    return { title: 'Product Not Found' }
-  }
+  const kitName = KIT_NAMES[handle] || (product?.title ?? 'Kit')
+  const price = KIT_PRICES[handle]
 
   return {
-    title: product.title,
-    description: product.description || `Shop ${product.title}`,
-    openGraph: {
-      title: product.title,
-      description: product.description || `Shop ${product.title}`,
-      ...(product.thumbnail ? { images: [{ url: product.thumbnail }] } : {}),
-    },
+    title: `${kitName} — Dinkra Pickleball`,
+    description: product?.description ||
+      `The Dinkra ${kitName}${price ? ` — $${price}` : ''}. Everything you need to start playing pickleball today.`,
   }
 }
 
+/* ─── Page ───────────────────────────────────────────────────────── */
 export default async function ProductPage({
   params,
 }: {
@@ -91,119 +153,17 @@ export default async function ProductPage({
   const { handle } = await params
   const product = await getProduct(handle)
 
-  if (!product) {
-    notFound()
-  }
+  if (!product) notFound()
 
   const variantExtensions = await getVariantExtensions(product.id)
-
-  const allImages = [
-    ...(product.thumbnail ? [{ url: product.thumbnail }] : []),
-    ...(product.images || []).filter((img: any) => img.url !== product.thumbnail),
-  ]
-
-  // Use placeholder if no images
-  const displayImages = allImages.length > 0
-    ? allImages
-    : [{ url: getProductPlaceholder(product.id) }]
+  const kitExtra = KIT_DATA[handle]
 
   return (
-    <>
-      {/* Breadcrumbs */}
-      <div className="border-b">
-        <div className="container-custom py-3">
-          <nav className="flex items-center gap-2 text-xs text-muted-foreground">
-            <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
-            <ChevronRight className="h-3 w-3" />
-            <Link href="/products" className="hover:text-foreground transition-colors">Shop</Link>
-            <ChevronRight className="h-3 w-3" />
-            <span className="text-foreground">{product.title}</span>
-          </nav>
-        </div>
-      </div>
-
-      <div className="container-custom py-8 lg:py-12">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
-          {/* Product Images */}
-          <div className="space-y-3">
-            <div className="relative aspect-[3/4] overflow-hidden bg-muted rounded-sm">
-              <Image
-                src={displayImages[0].url}
-                alt={product.title}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-              />
-            </div>
-
-            {displayImages.length > 1 && (
-              <div className="grid grid-cols-4 gap-3">
-                {displayImages.slice(1, 5).map((image: any, idx: number) => (
-                  <div
-                    key={idx}
-                    className="relative aspect-[3/4] overflow-hidden bg-muted rounded-sm"
-                  >
-                    <Image
-                      src={image.url}
-                      alt={`${product.title} ${idx + 2}`}
-                      fill
-                      sizes="12vw"
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Product Info */}
-          <div className="lg:sticky lg:top-24 lg:self-start space-y-6">
-            {/* Title & Subtitle */}
-            <div>
-              {product.subtitle && (
-                <p className="text-sm uppercase tracking-[0.15em] text-muted-foreground mb-2">
-                  {product.subtitle}
-                </p>
-              )}
-              <h1 className="text-h2 font-heading font-semibold">{product.title}</h1>
-            </div>
-
-            <ProductViewTracker
-              productId={product.id}
-              productTitle={product.title}
-              variantId={product.variants?.[0]?.id || null}
-              currency={product.variants?.[0]?.calculated_price?.currency_code || 'usd'}
-              value={product.variants?.[0]?.calculated_price?.calculated_amount ?? null}
-            />
-
-            {/* Variant Selector + Price + Add to Cart (client component) */}
-            <ProductActions product={product} variantExtensions={variantExtensions} />
-
-            {/* Trust Signals */}
-            <div className="grid grid-cols-3 gap-4 py-6 border-t">
-              <div className="text-center">
-                <Truck className="h-5 w-5 mx-auto mb-1.5" strokeWidth={1.5} />
-                <p className="text-xs text-muted-foreground">Free Shipping</p>
-              </div>
-              <div className="text-center">
-                <RotateCcw className="h-5 w-5 mx-auto mb-1.5" strokeWidth={1.5} />
-                <p className="text-xs text-muted-foreground">30-Day Returns</p>
-              </div>
-              <div className="text-center">
-                <Shield className="h-5 w-5 mx-auto mb-1.5" strokeWidth={1.5} />
-                <p className="text-xs text-muted-foreground">Secure Checkout</p>
-              </div>
-            </div>
-
-            {/* Accordion Sections */}
-            <ProductAccordion
-              description={product.description}
-              details={product.metadata as Record<string, string> | undefined}
-            />
-          </div>
-        </div>
-      </div>
-    </>
+    <DinkraProductDetail
+      product={product}
+      variantExtensions={variantExtensions}
+      handle={handle}
+      kitExtra={kitExtra}
+    />
   )
 }

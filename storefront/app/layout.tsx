@@ -1,6 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Lato, Inter } from 'next/font/google'
+import { Bebas_Neue, DM_Sans } from 'next/font/google'
 import { Providers } from './providers'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
@@ -14,26 +14,26 @@ import dynamic from 'next/dynamic'
 
 const CookieConsent = dynamic(() => import('@/components/cookie-consent'))
 
-const heading = Lato({
+const heading = Bebas_Neue({
   subsets: ['latin'],
-  weight: ['400', '700'],
+  weight: ['400'],
   variable: '--font-heading',
   display: 'swap',
 })
 
-const body = Inter({
+const body = DM_Sans({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-body',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
   title: {
-    default: 'Store — Modern Commerce',
-    template: '%s | Store',
+    default: 'Dinkra Pickleball — Everything You Need to Start Playing',
+    template: '%s | Dinkra Pickleball',
   },
-  description: 'Discover curated products crafted with care. A modern ecommerce experience.',
+  description: 'Complete pickleball starter kits for beginners and gift buyers. One kit. Court-ready gear. Ships in 2–4 days.',
 }
 
 export default function RootLayout({

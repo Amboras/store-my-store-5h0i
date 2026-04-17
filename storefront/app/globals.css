@@ -4,35 +4,39 @@
 
 @layer base {
   :root {
-    --background: 40 20% 98%;
-    --foreground: 0 0% 10%;
-    --muted: 40 10% 94%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 35 40% 50%;
-    --accent-foreground: 0 0% 100%;
-    --border: 40 10% 88%;
-    --ring: 35 40% 50%;
-    --primary: 0 0% 10%;
-    --primary-foreground: 0 0% 98%;
+    /* Dinkra Pickleball Brand Palette */
+    --background: 0 0% 98%;           /* near white */
+    --foreground: 228 24% 8%;         /* dark ink #0E1018 */
+    --muted: 40 14% 88%;              /* warm sand #E9E5DE */
+    --muted-foreground: 228 10% 45%;
+    --accent: 43 78% 60%;             /* gold #E8B84B */
+    --accent-foreground: 228 24% 8%;
+    --border: 40 14% 82%;
+    --ring: 141 58% 26%;              /* forest green */
+    --primary: 141 58% 26%;           /* forest green #1B6B3A */
+    --primary-foreground: 0 0% 100%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
-    /* Brand colors (dynamically injected from Store.metadata.brand) */
-    /* Access in CSS: var(--brand-primary), var(--brand-secondary) */
-    /* Managed by BrandStyleInjector component */
+    /* Dinkra specific tokens */
+    --dinkra-green: #1B6B3A;
+    --dinkra-off-white: #F9FAFB;
+    --dinkra-sand: #E9E5DE;
+    --dinkra-gold: #E8B84B;
+    --dinkra-ink: #0E1018;
   }
 
   .dark {
-    --background: 0 0% 6%;
+    --background: 228 24% 8%;
     --foreground: 40 20% 94%;
-    --muted: 0 0% 12%;
+    --muted: 228 20% 14%;
     --muted-foreground: 0 0% 55%;
-    --accent: 35 45% 55%;
-    --accent-foreground: 0 0% 100%;
-    --border: 0 0% 16%;
-    --ring: 35 45% 55%;
-    --primary: 40 20% 94%;
-    --primary-foreground: 0 0% 6%;
+    --accent: 43 78% 60%;
+    --accent-foreground: 228 24% 8%;
+    --border: 228 20% 18%;
+    --ring: 141 58% 36%;
+    --primary: 141 58% 36%;
+    --primary-foreground: 0 0% 100%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
   }
@@ -72,34 +76,50 @@
     @apply w-full;
   }
 
-  /* Brand color utilities - uses colors from Store.metadata.brand */
+  /* Dinkra brand utilities */
   .btn-brand-primary {
-    background-color: var(--brand-primary, hsl(var(--primary)));
+    background-color: var(--dinkra-green);
     color: white;
   }
   .btn-brand-primary:hover {
-    opacity: 0.9;
+    opacity: 0.92;
   }
 
   .text-brand-primary {
-    color: var(--brand-primary, hsl(var(--primary)));
+    color: var(--dinkra-green);
   }
 
   .text-brand-secondary {
-    color: var(--brand-secondary, hsl(var(--accent)));
+    color: var(--dinkra-gold);
   }
 
   .border-brand-primary {
-    border-color: var(--brand-primary, hsl(var(--border)));
+    border-color: var(--dinkra-green);
   }
 
   .bg-brand-primary {
-    background-color: var(--brand-primary, hsl(var(--primary)));
+    background-color: var(--dinkra-green);
   }
 
   .bg-brand-secondary {
-    background-color: var(--brand-secondary, hsl(var(--accent)));
+    background-color: var(--dinkra-gold);
   }
+
+  /* Marquee animation */
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+  }
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+}
+
+/* Marquee keyframe */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 /* Smooth scrolling */
@@ -109,12 +129,14 @@ html {
 
 /* Selection color */
 ::selection {
-  @apply bg-accent/20 text-foreground;
+  background-color: rgba(27, 107, 58, 0.18);
+  color: #0E1018;
 }
 
 /* Focus styles */
 :focus-visible {
-  @apply outline-2 outline-offset-2 outline-ring;
+  outline: 2px solid var(--dinkra-green);
+  outline-offset: 2px;
 }
 
 /* Cookie consent animation */
@@ -131,4 +153,9 @@ html {
 
 .animate-fade-in {
   animation: fade-in 0.3s ease-out;
+}
+
+/* Gold progress bar */
+.gold-progress {
+  background: linear-gradient(90deg, #E8B84B 0%, #f0cc6e 100%);
 }
