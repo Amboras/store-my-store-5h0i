@@ -172,68 +172,68 @@ export default function HomePage() {
   return (
     <>
       {/* ── HERO ─────────────────────────────────────────────────── */}
-      <section className="relative min-h-[90vh] bg-dinkra-sand overflow-hidden flex items-center">
-        {/* Gold diagonal slash behind everything */}
+      <section className="relative h-screen min-h-[640px] max-h-[1080px] overflow-hidden flex items-center">
+        {/* Full-bleed background image */}
+        <Image
+          src={HERO_IMAGE}
+          alt="Dinkra Pickleball starter kit — paddle, balls, bag"
+          fill
+          className="object-cover object-center"
+          priority
+          quality={100}
+          sizes="100vw"
+        />
+
+        {/* Dark gradient overlay — left side heavy, right fades out */}
         <div
-          className="absolute right-0 top-0 h-full w-1/2 pointer-events-none"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'linear-gradient(105deg, rgba(14,16,24,0.82) 0%, rgba(14,16,24,0.60) 40%, rgba(14,16,24,0.25) 70%, rgba(14,16,24,0.10) 100%)',
+          }}
           aria-hidden="true"
-        >
-          <div
-            className="absolute right-[15%] top-[-10%] h-[140%] w-[6px] bg-dinkra-gold opacity-40 rotate-[22deg] origin-top"
-          />
-          <div
-            className="absolute right-[20%] top-[-10%] h-[140%] w-[3px] bg-dinkra-gold opacity-20 rotate-[22deg] origin-top"
-          />
+        />
+
+        {/* Bottom vignette so trust bar bleeds in cleanly */}
+        <div
+          className="absolute bottom-0 inset-x-0 h-32 pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, transparent, rgba(14,16,24,0.35))' }}
+          aria-hidden="true"
+        />
+
+        {/* Gold diagonal slash accents */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+          <div className="absolute left-[38%] top-[-10%] h-[140%] w-[3px] bg-dinkra-gold opacity-25 rotate-[18deg] origin-top" />
+          <div className="absolute left-[42%] top-[-10%] h-[140%] w-[1.5px] bg-dinkra-gold opacity-12 rotate-[18deg] origin-top" />
         </div>
 
-        <div className="container-custom relative z-10 grid lg:grid-cols-2 gap-8 items-center py-16 lg:py-24">
-          {/* Left — text */}
-          <div className="space-y-6 animate-fade-in-up">
-            <p className="text-xs font-semibold tracking-[0.3em] uppercase text-dinkra-green">
+        {/* Content */}
+        <div className="container-custom relative z-10 py-24">
+          <div className="max-w-2xl space-y-6 animate-fade-in-up">
+            <p className="text-xs font-semibold tracking-[0.35em] uppercase text-dinkra-gold">
               Dinkra Pickleball
             </p>
-            <h1 className="font-heading text-display lg:text-display-lg text-dinkra-ink leading-none">
+            <h1 className="font-heading text-[clamp(3.5rem,9vw,7rem)] text-white leading-[0.92] tracking-tight">
               EVERYTHING<br />
               YOU NEED<br />
-              <span className="text-dinkra-green">TO START</span><br />
+              <span className="text-dinkra-gold">TO START</span><br />
               PLAYING.
             </h1>
-            <p className="text-base sm:text-lg text-dinkra-ink/70 max-w-md leading-relaxed font-body">
+            <p className="text-base sm:text-lg text-white/75 max-w-md leading-relaxed font-body">
               One kit. Court-ready gear. Ships in 2–4 days.
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
               <Link
                 href="/products"
-                className="inline-flex items-center gap-2 bg-dinkra-green text-white px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wide hover:bg-dinkra-green/90 transition-colors"
+                className="inline-flex items-center gap-2 bg-dinkra-green text-white px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wide hover:bg-dinkra-green/90 transition-colors shadow-lg shadow-dinkra-green/30"
               >
                 Shop Starter Kits
               </Link>
               <a
                 href="#whats-inside"
-                className="inline-flex items-center gap-2 border-2 border-dinkra-green text-dinkra-green px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wide hover:bg-dinkra-green hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 border-2 border-white/60 text-white px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wide hover:border-white hover:bg-white/10 transition-colors backdrop-blur-sm"
               >
                 See What&#39;s Inside
               </a>
-            </div>
-          </div>
-
-          {/* Right — hero photo */}
-          <div className="flex justify-center lg:justify-end items-center">
-            <div className="relative w-full max-w-lg">
-              {/* Decorative gold blob behind image */}
-              <div className="absolute -bottom-6 -right-6 w-64 h-64 bg-dinkra-gold/20 rounded-full blur-3xl pointer-events-none" />
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/5]">
-                <Image
-                  src={HERO_IMAGE}
-                  alt="Dinkra Pickleball starter kit — paddle, balls, bag"
-                  fill
-                  className="object-cover object-center"
-                  priority
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                {/* Subtle gold edge accent */}
-                <div className="absolute inset-0 ring-4 ring-dinkra-gold/30 rounded-2xl pointer-events-none" />
-              </div>
             </div>
           </div>
         </div>
