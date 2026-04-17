@@ -1,12 +1,16 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
 import {
   Truck, RotateCcw, Gift, Zap,
   Star, CheckCircle2, ChevronDown, ChevronUp,
   ShieldCheck, Package, Tag
 } from 'lucide-react'
+
+const HERO_IMAGE = 'https://ahjviugsxpwzpkyzgrhi.supabase.co/storage/v1/object/public/product-user-files/609c5354-c20b-4473-8c5f-fe886e4a0ab5%2Fcompressed_dinkra-hero-v2-01KPE64Q0V2A9W7E7GFD1PEW3D.webp'
+const LIFESTYLE_IMAGE = 'https://ahjviugsxpwzpkyzgrhi.supabase.co/storage/v1/object/public/product-user-files/609c5354-c20b-4473-8c5f-fe886e4a0ab5%2Fcompressed_dinkra-lifestyle-v2-01KPE64QQAPERFW8A3P153J7XK.webp'
 
 /* ─── Paddle SVG (Midnight Ink colourway) ─────────────────────────── */
 function PaddleSVG({ className = '' }: { className?: string }) {
@@ -213,12 +217,23 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Right — paddle illustration */}
+          {/* Right — hero photo */}
           <div className="flex justify-center lg:justify-end items-center">
-            <div className="relative">
-              {/* Drop shadow blob */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-dinkra-ink/20 rounded-full blur-xl" />
-              <PaddleSVG className="w-56 sm:w-72 lg:w-80 drop-shadow-2xl rotate-[-8deg]" />
+            <div className="relative w-full max-w-lg">
+              {/* Decorative gold blob behind image */}
+              <div className="absolute -bottom-6 -right-6 w-64 h-64 bg-dinkra-gold/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/5]">
+                <Image
+                  src={HERO_IMAGE}
+                  alt="Dinkra Pickleball starter kit — paddle, balls, bag"
+                  fill
+                  className="object-cover object-center"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                {/* Subtle gold edge accent */}
+                <div className="absolute inset-0 ring-4 ring-dinkra-gold/30 rounded-2xl pointer-events-none" />
+              </div>
             </div>
           </div>
         </div>
@@ -390,6 +405,38 @@ export default function HomePage() {
               ))}
             </span>
           ))}
+        </div>
+      </section>
+
+      {/* ── LIFESTYLE STRIP ───────────────────────────────────────── */}
+      <section className="relative h-[420px] sm:h-[520px] lg:h-[600px] overflow-hidden">
+        <Image
+          src={LIFESTYLE_IMAGE}
+          alt="Friends playing pickleball together on an outdoor court"
+          fill
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+        {/* Dark green overlay with centered call-out */}
+        <div className="absolute inset-0 bg-gradient-to-r from-dinkra-ink/70 via-dinkra-ink/40 to-transparent" />
+        <div className="absolute inset-0 flex items-center">
+          <div className="container-custom">
+            <div className="max-w-lg space-y-4">
+              <p className="text-dinkra-gold text-xs font-bold uppercase tracking-[0.3em]">Join Thousands of Players</p>
+              <h2 className="font-heading text-display text-white leading-none">
+                GET ON<br />THE COURT.
+              </h2>
+              <p className="text-white/80 text-base leading-relaxed">
+                Today. Not someday. Everything you need ships in 2–4 days.
+              </p>
+              <Link
+                href="/products"
+                className="inline-flex items-center gap-2 bg-dinkra-gold text-dinkra-ink px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wide hover:opacity-90 transition-opacity"
+              >
+                Shop All Kits
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
