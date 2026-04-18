@@ -163,7 +163,7 @@ export default function DinkraProductDetail({ product, handle, kitExtra, related
   const [qty, setQty] = useState(1)
   const [adding, setAdding] = useState(false)
   const [buyingNow, setBuyingNow] = useState(false)
-  const { addItem } = useCart()
+  const { addItemAsync } = useCart()
 
   const price = kitExtra ? (kitExtra.comparePrice - kitExtra.saveAmount) : null
   const compare = kitExtra?.comparePrice
@@ -174,7 +174,7 @@ export default function DinkraProductDetail({ product, handle, kitExtra, related
     if (!variantId) return
     setAdding(true)
     try {
-      for (let i = 0; i < qty; i++) await addItem(variantId, 1)
+      await addItemAsync({ variantId, quantity: qty })
     } finally {
       setAdding(false)
     }
@@ -184,7 +184,7 @@ export default function DinkraProductDetail({ product, handle, kitExtra, related
     if (!variantId) return
     setBuyingNow(true)
     try {
-      for (let i = 0; i < qty; i++) await addItem(variantId, 1)
+      await addItemAsync({ variantId, quantity: qty })
       window.location.href = '/checkout'
     } finally {
       setBuyingNow(false)
