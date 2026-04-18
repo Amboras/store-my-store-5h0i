@@ -354,12 +354,12 @@ export default function HomePage() {
                 </span>
 
                 {/* Kit image */}
-                <div className="relative w-full h-72 sm:h-80 overflow-hidden bg-dinkra-sand">
+                <div className="relative w-full h-80 sm:h-96 overflow-hidden bg-dinkra-sand">
                   <Image
                     src={kit.image}
                     alt={kit.name}
                     fill
-                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    className={`object-cover group-hover:scale-105 transition-transform duration-500 ${kit.handle === 'rally-kit' ? 'object-center' : 'object-top'}`}
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
