@@ -9,6 +9,7 @@ import {
   Minus, Plus
 } from 'lucide-react'
 import { ProductViewTracker } from '@/components/product/product-view-tracker'
+import { type VariantExtension } from '@/components/product/product-price'
 import { useCart } from '@/hooks/use-cart'
 
 /* ─── FAQ data per kit ───────────────────────────────────────────── */
@@ -151,7 +152,7 @@ interface KitExtra {
 
 interface Props {
   product: any
-  variantExtensions?: Record<string, { compare_at_price?: number | null; manage_inventory?: boolean; inventory_quantity?: number }>
+  variantExtensions?: Record<string, VariantExtension>
   handle: string
   kitExtra: KitExtra | undefined
   relatedThumbnails?: Record<string, string>
