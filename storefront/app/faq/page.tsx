@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 }
 
 const faqs = [
-  { q: 'How long does shipping take?', a: 'Standard shipping takes 5-7 business days within the US. Express shipping (2-3 business days) is available at checkout. International orders typically arrive within 10-14 business days.' },
+  { q: 'How long does shipping take?', a: 'We ship within 1 business day. Most US customers receive their kit in 2–4 business days. Free shipping on all orders.' },
   { q: 'What is your return policy?', a: 'We offer a 30-day return policy on all items. Products must be in original condition with tags attached. Simply initiate a return through your account or contact our support team.' },
   { q: 'Do you ship internationally?', a: 'Yes! We ship to most countries worldwide. International shipping rates and delivery times vary by destination. You\'ll see the exact cost at checkout.' },
   { q: 'How do I track my order?', a: 'Once your order ships, you\'ll receive a confirmation email with a tracking number. You can also check your order status anytime through your account dashboard.' },

@@ -40,16 +40,13 @@ export default async function ShippingPage() {
                 <h2 className="text-h3 font-heading font-semibold">Shipping</h2>
               </div>
               <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
-                <p>We offer free standard shipping on all orders over $75. Orders are processed within 1-2 business days.</p>
+                <p>We offer free shipping on all orders. Orders are processed within 1 business day.</p>
 
                 <div className="border rounded-sm overflow-hidden">
                   <table className="w-full text-sm">
                     <thead><tr className="bg-muted/50"><th className="text-left p-3 font-medium">Method</th><th className="text-left p-3 font-medium">Delivery Time</th><th className="text-left p-3 font-medium">Cost</th></tr></thead>
                     <tbody>
-                      <tr className="border-t"><td className="p-3">Standard</td><td className="p-3">5-7 business days</td><td className="p-3">Free over $75 / $5.99</td></tr>
-                      <tr className="border-t"><td className="p-3">Express</td><td className="p-3">2-3 business days</td><td className="p-3">$12.00</td></tr>
-                      <tr className="border-t"><td className="p-3">Overnight</td><td className="p-3">1 business day</td><td className="p-3">$25.00</td></tr>
-                      <tr className="border-t"><td className="p-3">International</td><td className="p-3">10-14 business days</td><td className="p-3">Calculated at checkout</td></tr>
+                      <tr className="border-t"><td className="p-3">Standard</td><td className="p-3">2–4 business days</td><td className="p-3">Free</td></tr>
                     </tbody>
                   </table>
                 </div>

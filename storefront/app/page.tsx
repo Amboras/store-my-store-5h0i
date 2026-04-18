@@ -327,7 +327,7 @@ export default function HomePage() {
               <span style={{ color: '#1B6B3A' }}>·</span>
               <span>Ships Together</span>
               <span style={{ color: '#1B6B3A' }}>·</span>
-              <span>Arrives in 3–7 Days</span>
+              <span>Arrives in 2–4 Days</span>
             </p>
           </div>
         </div>
