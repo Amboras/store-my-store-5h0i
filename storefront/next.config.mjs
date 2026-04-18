@@ -46,15 +46,9 @@ const nextConfig = {
   typescript: {
     tsconfigPath: './tsconfig.json',
   },
-  // Optimize webpack in dev (fallback when not using Turbopack)
-  webpack: (config, { dev }) => {
-    if (dev) {
-      config.watchOptions = {
-        poll: 1000,
-        aggregateTimeout: 300,
-      }
-    }
-    return config
+  // Turbopack handles dev bundling; no webpack overrides needed.
+  turbopack: {
+    root: __dirname,
   },
 }
 
