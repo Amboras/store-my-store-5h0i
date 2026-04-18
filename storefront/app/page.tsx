@@ -255,134 +255,129 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── 3-KIT PRODUCT GRID ────────────────────────────────────── */}
-      <section id="kits" className="py-16 lg:py-24 bg-dinkra-offwhite">
-        <div className="container-custom">
-          <div className="text-center mb-12">
-            <p className="text-xs font-bold tracking-[0.3em] uppercase text-dinkra-green mb-2">Choose Your Kit</p>
-            <h2 className="font-heading text-h1 text-dinkra-ink">GET ON THE COURT.</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            {KITS.map((kit) => (
-              <div
-                key={kit.handle}
-                className={`relative bg-white rounded-2xl flex flex-col overflow-hidden transition-shadow hover:shadow-xl ${
-                  kit.highlight
-                    ? 'border-2 border-dinkra-green shadow-lg'
-                    : 'border border-dinkra-sand'
-                }`}
-              >
-                {/* Most popular badge */}
-                {kit.highlight && (
-                  <div className="absolute top-0 inset-x-0 bg-dinkra-green text-white text-xs font-bold uppercase tracking-widest text-center py-2">
-                    ⭐ Most Popular
-                  </div>
-                )}
-
-                {/* Kit photo */}
-                <div className="relative w-full h-72 sm:h-80 overflow-hidden">
-                  <Image
-                    src={kit.image}
-                    alt={kit.name}
-                    fill
-                    className="object-cover object-top"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-
-                <div className={`p-6 flex flex-col flex-1 ${kit.highlight ? 'pt-5' : ''}`}>
-                  {/* Badge row */}
-                  <div className="flex items-start justify-between mb-4">
-                    <span className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full ${kit.badgeColor}`}>
-                      {kit.badge}
-                    </span>
-                  </div>
-
-                  {/* Name & description */}
-                  <h3 className="font-heading text-2xl text-dinkra-ink">{kit.name}</h3>
-                  <p className="text-sm text-dinkra-ink/60 mt-1 mb-4">{kit.tagline}</p>
-
-                  {/* Included pills */}
-                  <div className="flex flex-wrap gap-1.5 mb-5">
-                    {kit.items.map((item) => (
-                      <span
-                        key={item}
-                        className="text-[10px] font-semibold uppercase tracking-wide bg-dinkra-green/10 text-dinkra-green px-2 py-0.5 rounded-full"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Price */}
-                  <div className="flex items-baseline gap-2 mb-5 mt-auto">
-                    <span className="font-heading text-3xl text-dinkra-ink">${kit.price}</span>
-                    <span className="text-sm text-dinkra-ink/40 line-through">${kit.compare}</span>
-                    <span className="text-xs font-bold text-dinkra-green bg-dinkra-green/10 px-2 py-0.5 rounded-full">
-                      Save ${kit.compare - kit.price}
-                    </span>
-                  </div>
-
-                  {/* CTA */}
-                  <Link
-                    href={`/products/${kit.handle}`}
-                    className={`block w-full text-center py-3.5 rounded-full text-sm font-bold uppercase tracking-wide transition-colors ${
-                      kit.highlight
-                        ? 'bg-dinkra-green text-white hover:bg-dinkra-green/90'
-                        : 'border-2 border-dinkra-green text-dinkra-green hover:bg-dinkra-green hover:text-white'
-                    }`}
-                  >
-                    Add to Cart — ${kit.price}
-                  </Link>
-
-                  {/* Upsell nudge on starter */}
-                  {kit.upsell && (
-                    <p className="text-[11px] text-center text-dinkra-ink/50 mt-3 leading-snug">
-                      💡 Add the Rally Kit and ship free
-                    </p>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── WHAT'S INSIDE ─────────────────────────────────────────── */}
-      <section id="whats-inside" className="py-16 lg:py-24 bg-white">
+      <section id="whats-inside" className="py-16 lg:py-24" style={{ backgroundColor: '#E9E5DE' }}>
         <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Paddle illustration */}
-            <div className="flex justify-center">
-              <div className="relative w-64 sm:w-80">
-                <div className="absolute inset-0 bg-dinkra-green/8 rounded-full blur-3xl scale-110" />
-                <PaddleSVG className="relative w-full drop-shadow-2xl" />
+          {/* Header */}
+          <div className="text-center mb-12">
+            <h2
+              className="font-heading text-[clamp(3rem,8vw,5.5rem)] leading-none tracking-tight mb-3"
+              style={{ color: '#1B6B3A', fontFamily: 'var(--font-heading)' }}
+            >
+              WHAT&#39;S INSIDE
+            </h2>
+            <p className="font-body text-base text-dinkra-ink/60 font-light max-w-md mx-auto">
+              Everything you need to walk on court day one. Nothing you don&#39;t.
+            </p>
+          </div>
+
+          {/* Cards grid */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-12">
+            {/* Card 1 — Fiberglass Paddle */}
+            <div
+              className="group flex flex-col items-center text-center p-6 rounded-2xl bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
+              style={{ border: '0.5px solid #1B6B3A' }}
+            >
+              <div className="mb-4 flex items-center justify-center w-16 h-16 rounded-full" style={{ backgroundColor: '#E9E5DE' }}>
+                <svg viewBox="0 0 48 80" className="w-8 h-12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="18" y="54" width="12" height="24" rx="3" fill="#1B6B3A" opacity="0.25"/>
+                  <path d="M18 54 Q15 48 13 44 L35 44 Q33 48 30 54 Z" fill="#1B6B3A" opacity="0.4"/>
+                  <ellipse cx="24" cy="26" rx="17" ry="22" fill="#1B6B3A"/>
+                  <ellipse cx="24" cy="26" rx="13" ry="18" fill="#1B6B3A" opacity="0.6"/>
+                  <path d="M10 14 L38 36" stroke="#E8B84B" strokeWidth="2" strokeLinecap="round"/>
+                  <ellipse cx="24" cy="26" rx="17" ry="22" stroke="#1B6B3A" strokeWidth="1.5" fill="none" opacity="0.5"/>
+                </svg>
               </div>
+              <p className="font-heading text-sm text-dinkra-ink mb-1 leading-tight" style={{ letterSpacing: '0.05em' }}>FIBERGLASS PADDLE</p>
+              <p className="text-[11px] text-dinkra-ink/50 font-light leading-snug">USAPA-approved. PP honeycomb core. 7.5–8.2oz.</p>
             </div>
 
-            {/* Content */}
-            <div>
-              <p className="text-xs font-bold tracking-[0.3em] uppercase text-dinkra-green mb-3">Starter Kit</p>
-              <h2 className="font-heading text-h1 text-dinkra-ink mb-8">WHAT&#39;S INSIDE.</h2>
-              <ul className="space-y-5">
-                {WHATS_INSIDE.map((item, i) => (
-                  <li key={i} className="flex items-start gap-4">
-                    <span className="text-2xl flex-shrink-0 mt-0.5">{item.icon}</span>
-                    <div>
-                      <p className="font-semibold text-dinkra-ink text-sm">{item.title}</p>
-                      <p className="text-xs text-dinkra-ink/55 mt-0.5">{item.detail}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="/products/starter-kit"
-                className="mt-8 inline-flex items-center gap-2 bg-dinkra-green text-white px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wide hover:bg-dinkra-green/90 transition-colors"
-              >
-                Get the Starter Kit — $44
-              </Link>
+            {/* Card 2 — 4 Pickleballs */}
+            <div
+              className="group flex flex-col items-center text-center p-6 rounded-2xl bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
+              style={{ border: '0.5px solid #1B6B3A' }}
+            >
+              <div className="mb-4 flex items-center justify-center w-16 h-16 rounded-full" style={{ backgroundColor: '#E9E5DE' }}>
+                <svg viewBox="0 0 48 48" className="w-12 h-12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="14" cy="14" r="10" fill="#1B6B3A" opacity="0.15" stroke="#1B6B3A" strokeWidth="1.2"/>
+                  <circle cx="14" cy="14" r="2" fill="#1B6B3A" opacity="0.4"/>
+                  <circle cx="34" cy="14" r="10" fill="#1B6B3A" opacity="0.15" stroke="#1B6B3A" strokeWidth="1.2"/>
+                  <circle cx="34" cy="14" r="2" fill="#1B6B3A" opacity="0.4"/>
+                  <circle cx="14" cy="34" r="10" fill="#1B6B3A" opacity="0.15" stroke="#1B6B3A" strokeWidth="1.2"/>
+                  <circle cx="14" cy="34" r="2" fill="#1B6B3A" opacity="0.4"/>
+                  <circle cx="34" cy="34" r="10" fill="#1B6B3A" opacity="0.15" stroke="#1B6B3A" strokeWidth="1.2"/>
+                  <circle cx="34" cy="34" r="2" fill="#1B6B3A" opacity="0.4"/>
+                </svg>
+              </div>
+              <p className="font-heading text-sm text-dinkra-ink mb-1 leading-tight" style={{ letterSpacing: '0.05em' }}>4 PICKLEBALLS</p>
+              <p className="text-[11px] text-dinkra-ink/50 font-light leading-snug">USAPA-approved. Designed for outdoor hard courts.</p>
             </div>
+
+            {/* Card 3 — Grip Tape */}
+            <div
+              className="group flex flex-col items-center text-center p-6 rounded-2xl bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
+              style={{ border: '0.5px solid #1B6B3A' }}
+            >
+              <div className="mb-4 flex items-center justify-center w-16 h-16 rounded-full" style={{ backgroundColor: '#E9E5DE' }}>
+                <svg viewBox="0 0 48 48" className="w-12 h-12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <ellipse cx="24" cy="24" rx="14" ry="10" fill="#1B6B3A" opacity="0.15" stroke="#1B6B3A" strokeWidth="1.2"/>
+                  <ellipse cx="24" cy="20" rx="14" ry="10" fill="#E9E5DE" stroke="#1B6B3A" strokeWidth="1.2"/>
+                  <line x1="14" y1="20" x2="34" y2="20" stroke="#1B6B3A" strokeWidth="1" opacity="0.4"/>
+                  <line x1="13" y1="23" x2="35" y2="23" stroke="#1B6B3A" strokeWidth="1" opacity="0.4"/>
+                  <line x1="14" y1="17" x2="34" y2="17" stroke="#1B6B3A" strokeWidth="1" opacity="0.4"/>
+                  <ellipse cx="24" cy="20" rx="14" ry="10" stroke="#1B6B3A" strokeWidth="1.2" fill="none"/>
+                </svg>
+              </div>
+              <p className="font-heading text-sm text-dinkra-ink mb-1 leading-tight" style={{ letterSpacing: '0.05em' }}>GRIP TAPE</p>
+              <p className="text-[11px] text-dinkra-ink/50 font-light leading-snug">Replacement overgrip. Keeps your hold fresh and firm.</p>
+            </div>
+
+            {/* Card 4 — Drawstring Bag */}
+            <div
+              className="group flex flex-col items-center text-center p-6 rounded-2xl bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
+              style={{ border: '0.5px solid #1B6B3A' }}
+            >
+              <div className="mb-4 flex items-center justify-center w-16 h-16 rounded-full" style={{ backgroundColor: '#E9E5DE' }}>
+                <svg viewBox="0 0 48 52" className="w-10 h-12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16 6 Q24 2 32 6" stroke="#1B6B3A" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+                  <path d="M14 10 Q12 8 16 6 M34 6 Q38 8 34 10" stroke="#1B6B3A" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
+                  <path d="M10 12 Q8 36 12 46 Q24 50 36 46 Q40 36 38 12 Q24 8 10 12Z" fill="#1B6B3A" opacity="0.15" stroke="#1B6B3A" strokeWidth="1.2"/>
+                  <text x="24" y="34" textAnchor="middle" fill="#1B6B3A" fontSize="14" fontWeight="bold" fontFamily="sans-serif">D</text>
+                </svg>
+              </div>
+              <p className="font-heading text-sm text-dinkra-ink mb-1 leading-tight" style={{ letterSpacing: '0.05em' }}>DRAWSTRING BAG</p>
+              <p className="text-[11px] text-dinkra-ink/50 font-light leading-snug">Carry everything. Show up looking the part.</p>
+            </div>
+
+            {/* Card 5 — Quick-Start Rules Card */}
+            <div
+              className="group flex flex-col items-center text-center p-6 rounded-2xl bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md col-span-2 md:col-span-1"
+              style={{ border: '0.5px solid #1B6B3A' }}
+            >
+              <div className="mb-4 flex items-center justify-center w-16 h-16 rounded-full" style={{ backgroundColor: '#E9E5DE' }}>
+                <svg viewBox="0 0 48 48" className="w-12 h-12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="8" y="6" width="32" height="36" rx="3" fill="#1B6B3A" opacity="0.12" stroke="#1B6B3A" strokeWidth="1.2"/>
+                  <line x1="14" y1="16" x2="34" y2="16" stroke="#1B6B3A" strokeWidth="1.2" opacity="0.5"/>
+                  <line x1="14" y1="21" x2="30" y2="21" stroke="#1B6B3A" strokeWidth="1.2" opacity="0.5"/>
+                  <line x1="14" y1="26" x2="32" y2="26" stroke="#1B6B3A" strokeWidth="1.2" opacity="0.5"/>
+                  <path d="M14 33 L17 36 L24 29" stroke="#1B6B3A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <p className="font-heading text-sm text-dinkra-ink mb-1 leading-tight" style={{ letterSpacing: '0.05em' }}>RULES CARD</p>
+              <p className="text-[11px] text-dinkra-ink/50 font-light leading-snug">Learn the basics in 5 minutes. Get playing the same day.</p>
+            </div>
+          </div>
+
+          {/* Divider + trust line */}
+          <div className="pt-4">
+            <div className="h-px w-full mb-6" style={{ backgroundColor: '#1B6B3A', opacity: 0.2 }} />
+            <p className="text-center text-[11px] font-bold uppercase tracking-[0.25em] text-dinkra-ink/50 flex items-center justify-center gap-3 flex-wrap">
+              <span>All Items Included</span>
+              <span style={{ color: '#1B6B3A' }}>·</span>
+              <span>Ships Together</span>
+              <span style={{ color: '#1B6B3A' }}>·</span>
+              <span>Arrives in 3–7 Days</span>
+            </p>
           </div>
         </div>
       </section>
