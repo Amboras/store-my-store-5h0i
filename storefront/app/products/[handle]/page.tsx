@@ -1,10 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import Link from 'next/link'
-import { ChevronRight, Star, CheckCircle2, Truck, RotateCcw, ShieldCheck, ChevronDown, ChevronUp } from 'lucide-react'
 import { medusaServerClient } from '@/lib/medusa-client'
-import ProductActions from '@/components/product/product-actions'
-import { ProductViewTracker } from '@/components/product/product-view-tracker'
 import { type VariantExtension } from '@/components/product/product-price'
 import DinkraProductDetail from '@/components/product/dinkra-product-detail'
 
@@ -13,70 +9,67 @@ export const revalidate = 3600
 /* ─── Kit static data ────────────────────────────────────────────── */
 const KIT_DATA: Record<string, {
   badge: string
-  badgeColor: string
+  badgeStyle: 'solid' | 'outline'
+  headline: string
   tagline: string
   saveAmount: number
   comparePrice: number
-  checklist: string[]
+  reviewCount: number
+  checklist: { qty: string; item: string; detail: string }[]
+  infoBox: string
+  freeShipping: boolean
+  nudge?: string
   otherKits: string[]
 }> = {
   'starter-kit': {
     badge: 'Best Seller',
-    badgeColor: 'bg-dinkra-gold text-dinkra-ink',
-    tagline: 'Your first step on the court.',
+    badgeStyle: 'solid',
+    headline: 'Your first game starts here.',
+    tagline: 'Everything you need to walk on court day one. Nothing you don\'t.',
     saveAmount: 15,
     comparePrice: 59,
+    reviewCount: 127,
     checklist: [
-      '1× Fiberglass composite paddle (USAPA-approved, PP honeycomb core, 7.5–8.2 oz)',
-      '4× Outdoor pickleballs (USAPA-approved)',
-      '1× Replacement grip tape (cushioned, sweat-resistant)',
-      '1× Dinkra branded drawstring bag',
-      '1× Quick-start rules card',
+      { qty: '1×', item: 'Carbon fiber paddle', detail: 'USAPA-approved, PP honeycomb core, 7.5–8.2oz' },
+      { qty: '4×', item: 'Outdoor pickleballs', detail: 'USAPA-approved, built for hard courts' },
+      { qty: '1×', item: 'Replacement grip tape', detail: 'Keep your hold fresh and firm' },
+      { qty: '1×', item: 'Dinkra carry bag', detail: 'Carry everything, show up looking the part' },
+      { qty: '1×', item: 'Quick-start rules card', detail: 'Learn the basics in 5 minutes' },
     ],
-    otherKits: ['rally-kit', 'gift-kit'],
+    infoBox: 'Everything ships together in one box. No assembly required. Court-ready the same day it arrives.',
+    freeShipping: false,
+    nudge: 'Add the Rally Kit and ship free — save $20 when you bundle',
+    otherKits: ['rally-kit'],
   },
   'rally-kit': {
     badge: 'Most Popular',
-    badgeColor: 'bg-dinkra-green text-white',
-    tagline: 'Everything for two players, ready to go.',
+    badgeStyle: 'outline',
+    headline: 'Grab a partner. Get on the court.',
+    tagline: 'Two players. One box. Zero excuses.',
     saveAmount: 20,
     comparePrice: 99,
+    reviewCount: 98,
     checklist: [
-      '2× Fiberglass composite paddles (USAPA-approved)',
-      '6× Outdoor pickleballs (USAPA-approved)',
-      '2× Replacement grip tape',
-      '1× Premium Dinkra zip bag',
-      '1× Quick-start rules card',
+      { qty: '2×', item: 'Carbon fiber paddles', detail: 'USAPA-approved, PP honeycomb core, 7.5–8.2oz' },
+      { qty: '6×', item: 'Outdoor pickleballs', detail: 'USAPA-approved, built for hard courts' },
+      { qty: '2×', item: 'Replacement grip tape', detail: 'One for each player' },
+      { qty: '1×', item: 'Dinkra duffel bag', detail: 'Fits everything for two players' },
+      { qty: '2×', item: 'Quick-start rules cards', detail: 'One for each player' },
     ],
-    otherKits: ['starter-kit', 'gift-kit'],
-  },
-  'gift-kit': {
-    badge: 'Gift Ready',
-    badgeColor: 'bg-dinkra-gold text-dinkra-ink',
-    tagline: 'The perfect gift for anyone active.',
-    saveAmount: 25,
-    comparePrice: 119,
-    checklist: [
-      '1× Fiberglass composite paddle (USAPA-approved)',
-      '4× Outdoor pickleballs (USAPA-approved)',
-      '1× Replacement grip tape',
-      '1× Premium gift box with ribbon',
-      '1× Handwritten gift card slot',
-    ],
-    otherKits: ['starter-kit', 'rally-kit'],
+    infoBox: 'Everything for two players in one box. Split it with a partner or give it as a gift. Ships same day.',
+    freeShipping: true,
+    otherKits: ['starter-kit'],
   },
 }
 
 const KIT_NAMES: Record<string, string> = {
-  'starter-kit': 'Starter Kit',
-  'rally-kit':   'Rally Kit',
-  'gift-kit':    'Gift Kit',
+  'starter-kit': 'The Starter Kit',
+  'rally-kit':   'The Rally Kit',
 }
 
 const KIT_PRICES: Record<string, number> = {
   'starter-kit': 44,
   'rally-kit':   79,
-  'gift-kit':    94,
 }
 
 /* ─── Data fetchers ──────────────────────────────────────────────── */
