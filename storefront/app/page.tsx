@@ -281,12 +281,12 @@ export default function HomePage() {
                 )}
 
                 {/* Kit photo */}
-                <div className="relative w-full h-48 overflow-hidden">
+                <div className="relative w-full h-72 sm:h-80 overflow-hidden">
                   <Image
                     src={kit.image}
                     alt={kit.name}
                     fill
-                    className="object-cover object-center"
+                    className="object-cover object-top"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
