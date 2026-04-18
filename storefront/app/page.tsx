@@ -278,16 +278,6 @@ export default function HomePage() {
               className="group flex flex-col items-center text-center p-6 rounded-2xl bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
               style={{ border: '0.5px solid #1B6B3A' }}
             >
-              <div className="mb-4 flex items-center justify-center w-16 h-16 rounded-full" style={{ backgroundColor: '#E9E5DE' }}>
-                <svg viewBox="0 0 48 80" className="w-8 h-12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="18" y="54" width="12" height="24" rx="3" fill="#1B6B3A" opacity="0.25"/>
-                  <path d="M18 54 Q15 48 13 44 L35 44 Q33 48 30 54 Z" fill="#1B6B3A" opacity="0.4"/>
-                  <ellipse cx="24" cy="26" rx="17" ry="22" fill="#1B6B3A"/>
-                  <ellipse cx="24" cy="26" rx="13" ry="18" fill="#1B6B3A" opacity="0.6"/>
-                  <path d="M10 14 L38 36" stroke="#E8B84B" strokeWidth="2" strokeLinecap="round"/>
-                  <ellipse cx="24" cy="26" rx="17" ry="22" stroke="#1B6B3A" strokeWidth="1.5" fill="none" opacity="0.5"/>
-                </svg>
-              </div>
               <p className="font-heading text-sm text-dinkra-ink mb-1 leading-tight" style={{ letterSpacing: '0.05em' }}>FIBERGLASS PADDLE</p>
               <p className="text-[11px] text-dinkra-ink/50 font-light leading-snug">USAPA-approved. PP honeycomb core. 7.5–8.2oz.</p>
             </div>
@@ -297,18 +287,6 @@ export default function HomePage() {
               className="group flex flex-col items-center text-center p-6 rounded-2xl bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
               style={{ border: '0.5px solid #1B6B3A' }}
             >
-              <div className="mb-4 flex items-center justify-center w-16 h-16 rounded-full" style={{ backgroundColor: '#E9E5DE' }}>
-                <svg viewBox="0 0 48 48" className="w-12 h-12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="14" cy="14" r="10" fill="#1B6B3A" opacity="0.15" stroke="#1B6B3A" strokeWidth="1.2"/>
-                  <circle cx="14" cy="14" r="2" fill="#1B6B3A" opacity="0.4"/>
-                  <circle cx="34" cy="14" r="10" fill="#1B6B3A" opacity="0.15" stroke="#1B6B3A" strokeWidth="1.2"/>
-                  <circle cx="34" cy="14" r="2" fill="#1B6B3A" opacity="0.4"/>
-                  <circle cx="14" cy="34" r="10" fill="#1B6B3A" opacity="0.15" stroke="#1B6B3A" strokeWidth="1.2"/>
-                  <circle cx="14" cy="34" r="2" fill="#1B6B3A" opacity="0.4"/>
-                  <circle cx="34" cy="34" r="10" fill="#1B6B3A" opacity="0.15" stroke="#1B6B3A" strokeWidth="1.2"/>
-                  <circle cx="34" cy="34" r="2" fill="#1B6B3A" opacity="0.4"/>
-                </svg>
-              </div>
               <p className="font-heading text-sm text-dinkra-ink mb-1 leading-tight" style={{ letterSpacing: '0.05em' }}>4 PICKLEBALLS</p>
               <p className="text-[11px] text-dinkra-ink/50 font-light leading-snug">USAPA-approved. Designed for outdoor hard courts.</p>
             </div>
@@ -318,34 +296,16 @@ export default function HomePage() {
               className="group flex flex-col items-center text-center p-6 rounded-2xl bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
               style={{ border: '0.5px solid #1B6B3A' }}
             >
-              <div className="mb-4 flex items-center justify-center w-16 h-16 rounded-full" style={{ backgroundColor: '#E9E5DE' }}>
-                <svg viewBox="0 0 48 48" className="w-12 h-12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <ellipse cx="24" cy="24" rx="14" ry="10" fill="#1B6B3A" opacity="0.15" stroke="#1B6B3A" strokeWidth="1.2"/>
-                  <ellipse cx="24" cy="20" rx="14" ry="10" fill="#E9E5DE" stroke="#1B6B3A" strokeWidth="1.2"/>
-                  <line x1="14" y1="20" x2="34" y2="20" stroke="#1B6B3A" strokeWidth="1" opacity="0.4"/>
-                  <line x1="13" y1="23" x2="35" y2="23" stroke="#1B6B3A" strokeWidth="1" opacity="0.4"/>
-                  <line x1="14" y1="17" x2="34" y2="17" stroke="#1B6B3A" strokeWidth="1" opacity="0.4"/>
-                  <ellipse cx="24" cy="20" rx="14" ry="10" stroke="#1B6B3A" strokeWidth="1.2" fill="none"/>
-                </svg>
-              </div>
               <p className="font-heading text-sm text-dinkra-ink mb-1 leading-tight" style={{ letterSpacing: '0.05em' }}>GRIP TAPE</p>
               <p className="text-[11px] text-dinkra-ink/50 font-light leading-snug">Replacement overgrip. Keeps your hold fresh and firm.</p>
             </div>
 
-            {/* Card 4 — Drawstring Bag */}
+            {/* Card 4 — Carry Bag */}
             <div
               className="group flex flex-col items-center text-center p-6 rounded-2xl bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
               style={{ border: '0.5px solid #1B6B3A' }}
             >
-              <div className="mb-4 flex items-center justify-center w-16 h-16 rounded-full" style={{ backgroundColor: '#E9E5DE' }}>
-                <svg viewBox="0 0 48 52" className="w-10 h-12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M16 6 Q24 2 32 6" stroke="#1B6B3A" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-                  <path d="M14 10 Q12 8 16 6 M34 6 Q38 8 34 10" stroke="#1B6B3A" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
-                  <path d="M10 12 Q8 36 12 46 Q24 50 36 46 Q40 36 38 12 Q24 8 10 12Z" fill="#1B6B3A" opacity="0.15" stroke="#1B6B3A" strokeWidth="1.2"/>
-                  <text x="24" y="34" textAnchor="middle" fill="#1B6B3A" fontSize="14" fontWeight="bold" fontFamily="sans-serif">D</text>
-                </svg>
-              </div>
-              <p className="font-heading text-sm text-dinkra-ink mb-1 leading-tight" style={{ letterSpacing: '0.05em' }}>DRAWSTRING BAG</p>
+              <p className="font-heading text-sm text-dinkra-ink mb-1 leading-tight" style={{ letterSpacing: '0.05em' }}>CARRY BAG</p>
               <p className="text-[11px] text-dinkra-ink/50 font-light leading-snug">Carry everything. Show up looking the part.</p>
             </div>
 
@@ -354,15 +314,6 @@ export default function HomePage() {
               className="group flex flex-col items-center text-center p-6 rounded-2xl bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md col-span-2 md:col-span-1"
               style={{ border: '0.5px solid #1B6B3A' }}
             >
-              <div className="mb-4 flex items-center justify-center w-16 h-16 rounded-full" style={{ backgroundColor: '#E9E5DE' }}>
-                <svg viewBox="0 0 48 48" className="w-12 h-12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="8" y="6" width="32" height="36" rx="3" fill="#1B6B3A" opacity="0.12" stroke="#1B6B3A" strokeWidth="1.2"/>
-                  <line x1="14" y1="16" x2="34" y2="16" stroke="#1B6B3A" strokeWidth="1.2" opacity="0.5"/>
-                  <line x1="14" y1="21" x2="30" y2="21" stroke="#1B6B3A" strokeWidth="1.2" opacity="0.5"/>
-                  <line x1="14" y1="26" x2="32" y2="26" stroke="#1B6B3A" strokeWidth="1.2" opacity="0.5"/>
-                  <path d="M14 33 L17 36 L24 29" stroke="#1B6B3A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
               <p className="font-heading text-sm text-dinkra-ink mb-1 leading-tight" style={{ letterSpacing: '0.05em' }}>RULES CARD</p>
               <p className="text-[11px] text-dinkra-ink/50 font-light leading-snug">Learn the basics in 5 minutes. Get playing the same day.</p>
             </div>
