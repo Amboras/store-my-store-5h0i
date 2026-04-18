@@ -278,8 +278,8 @@ export default function HomePage() {
               className="group flex flex-col items-center text-center p-6 rounded-2xl bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
               style={{ border: '0.5px solid #1B6B3A' }}
             >
-              <p className="font-heading text-sm text-dinkra-ink mb-1 leading-tight" style={{ letterSpacing: '0.05em' }}>FIBERGLASS PADDLE</p>
-              <p className="text-[11px] text-dinkra-ink/50 font-light leading-snug">USAPA-approved. PP honeycomb core. 7.5–8.2oz.</p>
+              <p className="font-heading text-sm text-dinkra-ink mb-1 leading-tight" style={{ letterSpacing: '0.05em' }}>CARBON FIBER PADDLE</p>
+              <p className="text-[11px] text-dinkra-ink/50 font-light leading-snug">Carbon fiber face. PP honeycomb core. Lightweight & responsive.</p>
             </div>
 
             {/* Card 2 — 4 Pickleballs */}
