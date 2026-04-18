@@ -13,7 +13,6 @@ const faqs = [
   { q: 'How do I track my order?', a: 'Once your order ships, you\'ll receive a confirmation email with a tracking number. You can also check your order status anytime through your account dashboard.' },
   { q: 'Are your products sustainably made?', a: 'We prioritize working with artisans and manufacturers who use ethical practices and sustainable materials. All packaging is recycled and recyclable, and we offset carbon emissions from every shipment.' },
   { q: 'Can I modify or cancel my order?', a: 'Orders can be modified or cancelled within 2 hours of placement. After that, we begin processing and may not be able to make changes. Contact us immediately if you need help.' },
-  { q: 'Do you offer gift wrapping?', a: 'Yes, we offer complimentary gift wrapping on all orders. Simply select the gift wrap option at checkout and include a personalized message.' },
   { q: 'How do I care for my products?', a: 'Care instructions are included with every product and available on each product page. When in doubt, follow the care label attached to the item or contact us for guidance.' },
 ]
 
