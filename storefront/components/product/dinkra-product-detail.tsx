@@ -85,24 +85,23 @@ const KIT_META: Record<string, { name: string; price: number; compare: number; t
   'rally-kit':   { name: 'The Rally Kit',   price: 79, compare: 99, save: 20, tagline: 'Grab a partner. Get on the court.' },
 }
 
-function RelatedKitCard({ handle, product }: { handle: string; product?: any }) {
+function RelatedKitCard({ handle, thumbnail }: { handle: string; thumbnail?: string }) {
   const meta = KIT_META[handle]
   if (!meta) return null
-  const thumb = product?.thumbnail
 
   return (
     <Link
       href={`/products/${handle}`}
       className="group bg-white rounded-2xl overflow-hidden border border-[#1B6B3A]/20 hover:border-[#1B6B3A] hover:shadow-lg transition-all flex flex-col"
     >
-      <div className="relative aspect-[4/3] bg-[#E9E5DE] overflow-hidden">
-        {thumb ? (
+      <div className="relative aspect-square bg-[#E9E5DE] overflow-hidden">
+        {thumbnail ? (
           <Image
-            src={thumb}
+            src={thumbnail}
             alt={`Dinkra Pickleball ${meta.name}`}
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-500"
-            sizes="(max-width: 768px) 100vw, 400px"
+            sizes="(max-width: 768px) 100vw, 300px"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
@@ -152,13 +151,14 @@ interface KitExtra {
 
 interface Props {
   product: any
-  variantExtensions?: Record<string, VariantExtension>
+  variantExtensions?: Record<string, { compare_at_price?: number | null; manage_inventory?: boolean; inventory_quantity?: number }>
   handle: string
   kitExtra: KitExtra | undefined
+  relatedThumbnails?: Record<string, string>
 }
 
 /* ─── Main component ─────────────────────────────────────────────── */
-export default function DinkraProductDetail({ product, handle, kitExtra }: Props) {
+export default function DinkraProductDetail({ product, handle, kitExtra, relatedThumbnails = {} }: Props) {
   const [qty, setQty] = useState(1)
   const [adding, setAdding] = useState(false)
   const [buyingNow, setBuyingNow] = useState(false)
@@ -219,7 +219,7 @@ export default function DinkraProductDetail({ product, handle, kitExtra }: Props
 
             {/* ── Image area ─────────────────────────────────── */}
             <div className="space-y-4">
-              <div className="relative aspect-[4/3] rounded-2xl bg-white overflow-hidden shadow-sm">
+              <div className="relative aspect-square rounded-2xl bg-white overflow-hidden shadow-sm">
                 {kitExtra && (
                   kitExtra.badgeStyle === 'solid' ? (
                     <span className="absolute top-4 left-4 bg-[#1B6B3A] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full z-10">
@@ -412,9 +412,9 @@ export default function DinkraProductDetail({ product, handle, kitExtra }: Props
               <h2 className="font-heading text-h2 text-dinkra-ink mb-8 text-center">
                 YOU MIGHT ALSO LIKE
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-lg mx-auto">
                 {kitExtra.otherKits.map((h) => (
-                  <RelatedKitCard key={h} handle={h} />
+                  <RelatedKitCard key={h} handle={h} thumbnail={relatedThumbnails[h]} />
                 ))}
               </div>
             </div>

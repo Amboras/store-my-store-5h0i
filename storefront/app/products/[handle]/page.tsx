@@ -90,6 +90,22 @@ async function getProduct(handle: string) {
   }
 }
 
+async function getRelatedThumbnails(handles: string[]): Promise<Record<string, string>> {
+  const map: Record<string, string> = {}
+  await Promise.all(
+    handles.map(async (h) => {
+      try {
+        const res = await medusaServerClient.store.product.list({ handle: h, fields: 'thumbnail' })
+        const thumb = res.products?.[0]?.thumbnail
+        if (thumb) map[h] = thumb
+      } catch {
+        // ignore
+      }
+    })
+  )
+  return map
+}
+
 async function getVariantExtensions(productId: string): Promise<Record<string, VariantExtension>> {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || 'http://localhost:9000'
@@ -150,6 +166,9 @@ export default async function ProductPage({
 
   const variantExtensions = await getVariantExtensions(product.id)
   const kitExtra = KIT_DATA[handle]
+  const relatedThumbnails = kitExtra?.otherKits?.length
+    ? await getRelatedThumbnails(kitExtra.otherKits)
+    : {}
 
   return (
     <DinkraProductDetail
@@ -157,6 +176,7 @@ export default async function ProductPage({
       variantExtensions={variantExtensions}
       handle={handle}
       kitExtra={kitExtra}
+      relatedThumbnails={relatedThumbnails}
     />
   )
 }
