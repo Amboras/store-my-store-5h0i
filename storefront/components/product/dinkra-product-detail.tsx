@@ -219,7 +219,7 @@ export default function DinkraProductDetail({ product, handle, kitExtra }: Props
 
             {/* ── Image area ─────────────────────────────────── */}
             <div className="space-y-4">
-              <div className="relative aspect-square rounded-2xl bg-white overflow-hidden shadow-sm">
+              <div className="relative aspect-[4/3] rounded-2xl bg-white overflow-hidden shadow-sm">
                 {kitExtra && (
                   kitExtra.badgeStyle === 'solid' ? (
                     <span className="absolute top-4 left-4 bg-[#1B6B3A] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full z-10">
