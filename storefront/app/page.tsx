@@ -333,6 +333,67 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── OUR KITS ──────────────────────────────────────────────── */}
+      <section className="py-16 lg:py-24 bg-white">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <p className="text-xs font-bold tracking-[0.3em] uppercase text-dinkra-green mb-2">Shop</p>
+            <h2 className="font-heading text-h1 text-dinkra-ink">OUR KITS.</h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {KITS.map((kit) => (
+              <Link
+                key={kit.handle}
+                href={`/products/${kit.handle}`}
+                className={`group relative flex flex-col rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 ${kit.highlight ? 'ring-2 ring-dinkra-green' : 'ring-1 ring-dinkra-sand'}`}
+              >
+                {/* Badge */}
+                <span className={`absolute top-4 left-4 z-10 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full ${kit.badgeColor}`}>
+                  {kit.badge}
+                </span>
+
+                {/* Kit image */}
+                <div className="relative w-full h-72 sm:h-80 overflow-hidden bg-dinkra-sand">
+                  <Image
+                    src={kit.image}
+                    alt={kit.name}
+                    fill
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+
+                {/* Kit info */}
+                <div className="flex flex-col flex-1 p-6 bg-white">
+                  <h3 className="font-heading text-2xl text-dinkra-ink mb-1">{kit.name.toUpperCase()}</h3>
+                  <p className="text-xs text-dinkra-ink/50 mb-4 font-light">{kit.tagline}</p>
+
+                  <ul className="space-y-1 mb-6">
+                    {kit.items.map((item) => (
+                      <li key={item} className="flex items-center gap-2 text-xs text-dinkra-ink/70">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-dinkra-green flex-shrink-0" strokeWidth={2} />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-auto flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="font-heading text-2xl text-dinkra-ink">${kit.price}</span>
+                      <span className="text-sm text-dinkra-ink/40 line-through">${kit.compare}</span>
+                    </div>
+                    <span className="inline-flex items-center gap-1 bg-dinkra-green text-white text-xs font-bold uppercase tracking-wide px-4 py-2 rounded-full group-hover:bg-dinkra-green/90 transition-colors">
+                      Shop Now
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── SCROLLING MARQUEE ─────────────────────────────────────── */}
       <section className="bg-dinkra-green py-4 overflow-hidden select-none">
         <div className="marquee-track">
