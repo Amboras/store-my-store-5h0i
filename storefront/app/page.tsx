@@ -11,6 +11,8 @@ import {
 
 const HERO_IMAGE = 'https://ahjviugsxpwzpkyzgrhi.supabase.co/storage/v1/object/public/product-user-files/609c5354-c20b-4473-8c5f-fe886e4a0ab5%2Fcompressed_dinkra-hero-v2-01KPE64Q0V2A9W7E7GFD1PEW3D.webp'
 const LIFESTYLE_IMAGE = 'https://ahjviugsxpwzpkyzgrhi.supabase.co/storage/v1/object/public/product-user-files/609c5354-c20b-4473-8c5f-fe886e4a0ab5%2Fcompressed_dinkra-lifestyle-v2-01KPE64QQAPERFW8A3P153J7XK.webp'
+const STARTER_KIT_IMAGE = 'https://ahjviugsxpwzpkyzgrhi.supabase.co/storage/v1/object/public/product-user-files/609c5354-c20b-4473-8c5f-fe886e4a0ab5%2Fpickleballstarterkit_hq-01KPF83HWM3KA49QWKV8C1VZXR.webp'
+const RALLY_KIT_IMAGE = 'https://ahjviugsxpwzpkyzgrhi.supabase.co/storage/v1/object/public/product-user-files/609c5354-c20b-4473-8c5f-fe886e4a0ab5%2FIMG_2111-01KPF7ZY40HG9WBJ432K4ST2BC.webp'
 
 /* ─── Paddle SVG (Midnight Ink colourway) ─────────────────────────── */
 function PaddleSVG({ className = '' }: { className?: string }) {
@@ -79,6 +81,7 @@ const KITS = [
     badgeColor: 'bg-dinkra-gold text-dinkra-ink',
     highlight: false,
     upsell: true,
+    image: STARTER_KIT_IMAGE,
   },
   {
     handle: 'rally-kit',
@@ -91,6 +94,7 @@ const KITS = [
     badgeColor: 'bg-dinkra-green text-white',
     highlight: true,
     upsell: false,
+    image: RALLY_KIT_IMAGE,
   },
 ]
 
@@ -276,10 +280,20 @@ export default function HomePage() {
                   </div>
                 )}
 
-                <div className={`p-6 flex flex-col flex-1 ${kit.highlight ? 'pt-12' : ''}`}>
-                  {/* Paddle icon + badge */}
+                {/* Kit photo */}
+                <div className="relative w-full h-48 overflow-hidden">
+                  <Image
+                    src={kit.image}
+                    alt={kit.name}
+                    fill
+                    className="object-cover object-center"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+
+                <div className={`p-6 flex flex-col flex-1 ${kit.highlight ? 'pt-5' : ''}`}>
+                  {/* Badge row */}
                   <div className="flex items-start justify-between mb-4">
-                    <PaddleSVG className="w-20 h-28 opacity-90" />
                     <span className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full ${kit.badgeColor}`}>
                       {kit.badge}
                     </span>
