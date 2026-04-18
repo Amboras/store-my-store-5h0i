@@ -92,18 +92,6 @@ const KITS = [
     highlight: true,
     upsell: false,
   },
-  {
-    handle: 'gift-kit',
-    name: 'Gift Kit',
-    tagline: 'The perfect gift for anyone active.',
-    items: ['1 Paddle', '4 Outdoor Balls', 'Grip Tape', 'Gift Box', 'Ribbon & Card'],
-    price: 94,
-    compare: 119,
-    badge: 'Gift Ready',
-    badgeColor: 'bg-dinkra-gold text-dinkra-ink',
-    highlight: false,
-    upsell: false,
-  },
 ]
 
 /* ─── WHAT'S INSIDE items ─────────────────────────────────────────── */
@@ -271,7 +259,7 @@ export default function HomePage() {
             <h2 className="font-heading text-h1 text-dinkra-ink">GET ON THE COURT.</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {KITS.map((kit) => (
               <div
                 key={kit.handle}
