@@ -59,9 +59,6 @@ const FAQ_ITEMS: Record<string, { q: string; a: string }[]> = {
   ],
 }
 
-/* ─── Grip sizes ─────────────────────────────────────────────────── */
-const GRIP_SIZES = ['4"', '4¼"', '4½"']
-
 /* ─── FAQ accordion item ─────────────────────────────────────────── */
 function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false)
@@ -162,7 +159,6 @@ interface Props {
 
 /* ─── Main component ─────────────────────────────────────────────── */
 export default function DinkraProductDetail({ product, handle, kitExtra }: Props) {
-  const [gripSize, setGripSize] = useState('4¼"')
   const [qty, setQty] = useState(1)
   const [adding, setAdding] = useState(false)
   const [buyingNow, setBuyingNow] = useState(false)
@@ -337,28 +333,6 @@ export default function DinkraProductDetail({ product, handle, kitExtra }: Props
                   </div>
                 </div>
               )}
-
-              {/* Grip size selector */}
-              <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-dinkra-ink mb-3">
-                  Grip Size
-                </p>
-                <div className="flex gap-2">
-                  {['4"', '4¼"', '4½"'].map((size) => (
-                    <button
-                      key={size}
-                      onClick={() => setGripSize(size)}
-                      className={`px-4 py-2 rounded-lg text-sm font-semibold border transition-all ${
-                        gripSize === size
-                          ? 'bg-[#1B6B3A] text-white border-[#1B6B3A]'
-                          : 'bg-white text-dinkra-ink border-dinkra-ink/20 hover:border-[#1B6B3A] hover:text-[#1B6B3A]'
-                      }`}
-                    >
-                      {size}
-                    </button>
-                  ))}
-                </div>
-              </div>
 
               {/* Quantity selector */}
               <div>
