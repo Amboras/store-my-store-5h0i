@@ -1,10 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Bebas_Neue, DM_Sans } from 'next/font/google'
+import { Instrument_Serif, DM_Sans } from 'next/font/google'
 import { Providers } from './providers'
-import Header from '@/components/layout/header'
-import Footer from '@/components/layout/footer'
-import AnnouncementBar from '@/components/layout/announcement-bar'
 import { AnalyticsProvider } from '@/components/analytics-provider'
 import { MetaPixelProvider } from '@/components/meta-pixel-provider'
 import { Toaster } from 'sonner'
@@ -14,9 +11,10 @@ import dynamic from 'next/dynamic'
 
 const CookieConsent = dynamic(() => import('@/components/cookie-consent'))
 
-const heading = Bebas_Neue({
+const heading = Instrument_Serif({
   subsets: ['latin'],
   weight: ['400'],
+  style: ['normal', 'italic'],
   variable: '--font-heading',
   display: 'swap',
 })
@@ -29,11 +27,9 @@ const body = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: {
-    default: 'Dinkra Pickleball — Everything You Need to Start Playing',
-    template: '%s | Dinkra Pickleball',
-  },
-  description: 'Complete pickleball starter kits for beginners and gift buyers. One kit. Court-ready gear. Ships in 2–4 days.',
+  title: 'Land the Job — 50 AI Prompts that Get You Callbacks',
+  description:
+    'Stop sending generic applications that get auto-rejected. 50 copy-paste ChatGPT prompts for resume, cover letter, LinkedIn, interview prep, and salary negotiation. Instant PDF — $27.',
 }
 
 export default function RootLayout({
@@ -45,8 +41,7 @@ export default function RootLayout({
     <html lang="en" className={`${heading.variable} ${body.variable}`} suppressHydrationWarning>
       <head>
         {/* PostHog cross-origin iframe recording shim — records DOM via rrweb and forwards
-            events to the parent window (admin dashboard) for session replay.
-            Uses rrweb@2.0.0-alpha.20 (same version proven in ecomcoder production). */}
+            events to the parent window (admin dashboard) for session replay. */}
         <script dangerouslySetInnerHTML={{ __html: `
 (function() {
   'use strict';
@@ -76,11 +71,9 @@ export default function RootLayout({
 })();
         `}} />
       </head>
-      <body>
+      <body className="bg-[#FAF7F2] text-[#0A0A0A] antialiased">
         <Providers>
           <ElementPickerListener />
-          <AnnouncementBar />
-          <Header />
           <main className="min-h-screen">
             <ErrorBoundary>
               <AnalyticsProvider>
@@ -90,7 +83,6 @@ export default function RootLayout({
               </AnalyticsProvider>
             </ErrorBoundary>
           </main>
-          <Footer />
           <CookieConsent />
           <Toaster position="bottom-right" richColors />
         </Providers>
