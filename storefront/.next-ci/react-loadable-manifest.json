@@ -1,0 +1,16 @@
+{
+  "app/checkout/page.tsx -> @/components/checkout/stripe-payment-form": {
+    "id": 5552,
+    "files": [
+      "static/chunks/4195.02ab92e1a42ead1b.js",
+      "static/chunks/5552.4c3a745f4e8e6ac9.js"
+    ]
+  },
+  "components/policy-markdown.tsx -> ./policy-markdown-inner": {
+    "id": 7423,
+    "files": [
+      "static/chunks/4320.3c59371750cbcfbe.js",
+      "static/chunks/7423.73b4c81ebcc63159.js"
+    ]
+  }
+}

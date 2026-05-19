@@ -4,39 +4,42 @@
 
 @layer base {
   :root {
-    /* Dinkra Pickleball Brand Palette */
-    --background: 0 0% 98%;           /* near white */
-    --foreground: 228 24% 8%;         /* dark ink #0E1018 */
-    --muted: 40 14% 88%;              /* warm sand #E9E5DE */
-    --muted-foreground: 228 10% 45%;
-    --accent: 43 78% 60%;             /* gold #E8B84B */
-    --accent-foreground: 228 24% 8%;
-    --border: 40 14% 82%;
-    --ring: 141 58% 26%;              /* forest green */
-    --primary: 141 58% 26%;           /* forest green #1B6B3A */
+    /* My Store — Modern DTC palette (Teal HQ-inspired) */
+    --background: 44 38% 97%;         /* warm off-white #FAF7F0 */
+    --foreground: 220 65% 12%;        /* deep navy #0B1F3A */
+    --muted: 38 30% 92%;              /* cream #F1ECE0 */
+    --muted-foreground: 220 20% 38%;
+    --accent: 12 100% 64%;            /* coral #FF6849 */
+    --accent-foreground: 0 0% 100%;
+    --border: 38 20% 86%;             /* soft cream border */
+    --ring: 12 100% 64%;
+    --primary: 220 65% 12%;           /* deep navy */
     --primary-foreground: 0 0% 100%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
-    /* Dinkra specific tokens */
-    --dinkra-green: #1B6B3A;
-    --dinkra-off-white: #F9FAFB;
-    --dinkra-sand: #E9E5DE;
-    --dinkra-gold: #E8B84B;
-    --dinkra-ink: #0E1018;
+    /* Brand tokens */
+    --brand-navy: #0B1F3A;
+    --brand-navy-dark: #061227;
+    --brand-coral: #FF6849;
+    --brand-coral-dark: #E84F30;
+    --brand-cream: #FAF7F0;
+    --brand-cream-dark: #F1ECE0;
+    --brand-cream-deep: #E8E3D5;
+    --brand-ink: #0B1F3A;
   }
 
   .dark {
-    --background: 228 24% 8%;
-    --foreground: 40 20% 94%;
-    --muted: 228 20% 14%;
-    --muted-foreground: 0 0% 55%;
-    --accent: 43 78% 60%;
-    --accent-foreground: 228 24% 8%;
-    --border: 228 20% 18%;
-    --ring: 141 58% 36%;
-    --primary: 141 58% 36%;
-    --primary-foreground: 0 0% 100%;
+    --background: 220 50% 7%;
+    --foreground: 44 38% 95%;
+    --muted: 220 30% 14%;
+    --muted-foreground: 220 10% 65%;
+    --accent: 12 100% 64%;
+    --accent-foreground: 0 0% 100%;
+    --border: 220 20% 18%;
+    --ring: 12 100% 64%;
+    --primary: 44 38% 95%;
+    --primary-foreground: 220 65% 12%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
   }
@@ -52,7 +55,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
+    @apply font-heading tracking-tight;
   }
 }
 
@@ -61,101 +64,81 @@
     @apply mx-auto max-w-content px-4 sm:px-6 lg:px-8;
   }
 
-  .text-balance {
-    text-wrap: balance;
-  }
+  .text-balance { text-wrap: balance; }
+  .text-pretty  { text-wrap: pretty;  }
 
   .link-underline {
     @apply relative;
   }
   .link-underline::after {
     content: '';
-    @apply absolute bottom-0 left-0 h-px w-0 bg-foreground transition-all duration-300;
+    @apply absolute bottom-0 left-0 h-px w-0 bg-current transition-all duration-300;
   }
   .link-underline:hover::after {
     @apply w-full;
   }
 
-  /* Dinkra brand utilities */
-  .btn-brand-primary {
-    background-color: var(--dinkra-green);
+  /* Brand button utilities */
+  .btn-primary {
+    background-color: var(--brand-navy);
     color: white;
+    transition: background-color 200ms, transform 200ms;
   }
-  .btn-brand-primary:hover {
-    opacity: 0.92;
-  }
-
-  .text-brand-primary {
-    color: var(--dinkra-green);
+  .btn-primary:hover {
+    background-color: var(--brand-navy-dark);
   }
 
-  .text-brand-secondary {
-    color: var(--dinkra-gold);
+  .btn-accent {
+    background-color: var(--brand-coral);
+    color: white;
+    transition: background-color 200ms, transform 200ms;
+  }
+  .btn-accent:hover {
+    background-color: var(--brand-coral-dark);
   }
 
-  .border-brand-primary {
-    border-color: var(--dinkra-green);
-  }
+  .text-accent-coral { color: var(--brand-coral); }
+  .bg-accent-coral   { background-color: var(--brand-coral); }
+  .border-accent-coral { border-color: var(--brand-coral); }
 
-  .bg-brand-primary {
-    background-color: var(--dinkra-green);
-  }
+  /* Soft cream backgrounds */
+  .bg-cream      { background-color: var(--brand-cream); }
+  .bg-cream-deep { background-color: var(--brand-cream-deep); }
 
-  .bg-brand-secondary {
-    background-color: var(--dinkra-gold);
-  }
-
-  /* Marquee animation */
+  /* Marquee */
   .marquee-track {
     display: flex;
     width: max-content;
     animation: marquee 30s linear infinite;
   }
-  .marquee-track:hover {
-    animation-play-state: paused;
+  .marquee-track:hover { animation-play-state: paused; }
+
+  /* Subtle dot pattern background */
+  .bg-dot-pattern {
+    background-image: radial-gradient(circle, rgba(11,31,58,0.08) 1px, transparent 1px);
+    background-size: 18px 18px;
   }
 }
 
-/* Marquee keyframe */
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
-/* Selection color */
 ::selection {
-  background-color: rgba(27, 107, 58, 0.18);
-  color: #0E1018;
+  background-color: rgba(255, 104, 73, 0.22);
+  color: var(--brand-navy);
 }
 
-/* Focus styles */
 :focus-visible {
-  outline: 2px solid var(--dinkra-green);
+  outline: 2px solid var(--brand-coral);
   outline-offset: 2px;
 }
 
-/* Cookie consent animation */
 @keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(1rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(1rem); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
-.animate-fade-in {
-  animation: fade-in 0.3s ease-out;
-}
-
-/* Gold progress bar */
-.gold-progress {
-  background: linear-gradient(90deg, #E8B84B 0%, #f0cc6e 100%);
-}
+.animate-fade-in { animation: fade-in 0.3s ease-out; }
