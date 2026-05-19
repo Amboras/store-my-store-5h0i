@@ -6,7 +6,7 @@ import Link from 'next/link'
 import {
   Star, Download, ShieldCheck, RefreshCw, ChevronRight,
   ChevronDown, Minus, Plus, Sparkles, Check, ShoppingBag,
-  Flame, Zap, Clock, FileText, CheckCircle2,
+  Flame, Zap, CheckCircle2,
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { ProductViewTracker } from '@/components/product/product-view-tracker'
