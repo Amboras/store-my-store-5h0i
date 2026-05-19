@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react'
 import { X } from 'lucide-react'
 
 const MESSAGES = [
-  'Free shipping on orders over $75',
-  'New here? Use code WELCOME10 for 10% off',
-  '30-day returns, on us',
+  'Limited launch sale — 30% off all prompt packs',
+  'Instant download. Lifetime updates included',
+  '30-day money-back guarantee on every pack',
 ]
 
 export default function AnnouncementBar() {
