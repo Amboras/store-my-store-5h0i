@@ -75,7 +75,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
   const qualifiesForBonus = remainingForBonus <= 0 && (cart?.items?.length || 0) > 0
 
   // Upsell: find a product not already in the cart
-  const inCartIds = new Set((cart?.items || []).map(i => i.product_id).filter(Boolean) as string[])
+  const inCartIds = new Set(((cart?.items || []) as CartLineItem[]).map((i: CartLineItem) => i.product_id).filter(Boolean) as string[])
   const upsellProduct = (allProducts ?? []).find((p: any) => !inCartIds.has(p.id))
   const upsellVariant = upsellProduct?.variants?.[0]
   const upsellPrice = upsellVariant?.calculated_price?.calculated_amount ?? 0
