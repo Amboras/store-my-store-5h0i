@@ -169,18 +169,14 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 
                 return (
                   <div key={item.id} className="flex gap-4">
-                    <Link
-                      href={`/products/${item.product_handle ?? ''}`}
-                      onClick={onClose}
-                      className="relative h-28 w-22 flex-shrink-0 overflow-hidden rounded-lg bg-cream-deep"
-                    >
+                    <div className="relative h-28 w-22 flex-shrink-0 overflow-hidden rounded-lg bg-cream-deep">
                       <Image
                         src={getProductImage(item.thumbnail, item.product_id || item.id)}
                         alt={item.title}
                         fill
                         className="object-cover"
                       />
-                    </Link>
+                    </div>
 
                     <div className="flex flex-1 flex-col min-w-0">
                       <div className="flex justify-between gap-2">
