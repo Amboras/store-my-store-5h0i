@@ -2,15 +2,15 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
-import { ShoppingBag, Menu, X } from 'lucide-react'
+import { ShoppingBag, Menu, X, Search, User } from 'lucide-react'
 import { useCart } from '@/hooks/use-cart'
 import CartDrawer from '@/components/cart/cart-drawer'
 
 const NAV_LINKS = [
-  { label: 'Shop',      href: '/products' },
-  { label: 'Our Kits',  href: '/products#kits' },
-  { label: 'Reviews',   href: '/#reviews' },
-  { label: 'About',     href: '/about' },
+  { label: 'Shop',        href: '/products' },
+  { label: 'Collections', href: '/collections' },
+  { label: 'About',       href: '/about' },
+  { label: 'Contact',     href: '/contact' },
 ]
 
 export default function Header() {
@@ -22,7 +22,7 @@ export default function Header() {
   const mobileMenuCloseRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 10)
+    const handleScroll = () => setIsScrolled(window.scrollY > 8)
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -58,12 +58,14 @@ export default function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-40 w-full transition-all duration-300 bg-white ${
-          isScrolled ? 'border-b-2 border-dinkra-green shadow-sm' : 'border-b border-transparent'
+        className={`sticky top-0 z-40 w-full transition-all duration-300 ${
+          isScrolled
+            ? 'bg-background/85 backdrop-blur-md border-b border-border'
+            : 'bg-background border-b border-transparent'
         }`}
       >
         <div className="container-custom">
-          <div className="flex h-16 items-center justify-between gap-4">
+          <div className="flex h-16 lg:h-18 items-center justify-between gap-4">
 
             {/* Mobile menu toggle */}
             <button
@@ -71,31 +73,16 @@ export default function Header() {
               className="p-2 -ml-2 lg:hidden hover:opacity-70 transition-opacity"
               aria-label="Open menu"
             >
-              <Menu className="h-5 w-5 text-dinkra-ink" />
+              <Menu className="h-5 w-5 text-brand-navy" strokeWidth={2} />
             </button>
 
-            {/* Logo */}
-            <Link href="/" className="flex flex-col items-start leading-none select-none">
-              <span
-                className="font-heading text-3xl tracking-wider text-dinkra-green"
-                style={{ letterSpacing: '0.06em' }}
-              >
-                DINKRA
-              </span>
-              <span
-                className="font-body text-[8px] font-semibold tracking-[0.3em] uppercase text-dinkra-ink -mt-0.5"
-              >
-                PICKLEBALL
-              </span>
-            </Link>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-8">
+            {/* Desktop Left Nav */}
+            <nav className="hidden lg:flex items-center gap-7 flex-1 basis-0">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm font-semibold tracking-wide text-dinkra-ink hover:text-dinkra-green transition-colors uppercase"
+                  className="text-sm font-medium text-brand-navy/85 hover:text-brand-coral transition-colors"
                   prefetch={true}
                 >
                   {link.label}
@@ -103,16 +90,38 @@ export default function Header() {
               ))}
             </nav>
 
-            {/* Cart */}
-            <div className="flex items-center gap-2">
+            {/* Logo (centered on desktop) */}
+            <Link href="/" className="flex items-center select-none lg:absolute lg:left-1/2 lg:-translate-x-1/2">
+              <span className="font-heading text-2xl font-bold tracking-tight text-brand-navy">
+                My Store
+              </span>
+              <span className="ml-1 inline-block w-1.5 h-1.5 rounded-full bg-brand-coral" aria-hidden />
+            </Link>
+
+            {/* Right icons */}
+            <div className="flex items-center gap-1 sm:gap-2 lg:flex-1 lg:basis-0 lg:justify-end">
+              <Link
+                href="/search"
+                className="p-2.5 hover:opacity-70 transition-opacity hidden sm:inline-flex"
+                aria-label="Search"
+              >
+                <Search className="h-[18px] w-[18px] text-brand-navy" strokeWidth={2} />
+              </Link>
+              <Link
+                href="/account"
+                className="p-2.5 hover:opacity-70 transition-opacity hidden sm:inline-flex"
+                aria-label="Account"
+              >
+                <User className="h-[18px] w-[18px] text-brand-navy" strokeWidth={2} />
+              </Link>
               <button
                 onClick={() => setIsCartOpen(true)}
                 className="relative p-2.5 hover:opacity-70 transition-opacity"
                 aria-label="Shopping bag"
               >
-                <ShoppingBag className="h-5 w-5 text-dinkra-ink" />
+                <ShoppingBag className="h-[18px] w-[18px] text-brand-navy" strokeWidth={2} />
                 {itemCount > 0 && (
-                  <span className="absolute top-0.5 right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-dinkra-green text-[10px] font-bold text-white">
+                  <span className="absolute -top-0.5 -right-0.5 flex h-[18px] min-w-[18px] px-1 items-center justify-center rounded-full bg-brand-coral text-[10px] font-bold text-white">
                     {itemCount}
                   </span>
                 )}
@@ -126,7 +135,7 @@ export default function Header() {
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div
-            className="absolute inset-0 bg-black/40"
+            className="absolute inset-0 bg-brand-navy/40 backdrop-blur-sm"
             onClick={() => setIsMobileMenuOpen(false)}
           />
           <div
@@ -135,10 +144,17 @@ export default function Header() {
             aria-modal="true"
             aria-label="Navigation menu"
             onKeyDown={handleMobileMenuKeyDown}
-            className="absolute inset-y-0 left-0 w-80 max-w-[85vw] bg-white animate-slide-in-right flex flex-col"
+            className="absolute inset-y-0 left-0 w-80 max-w-[85vw] bg-background animate-slide-in-right flex flex-col"
           >
-            <div className="flex items-center justify-between p-5 border-b border-dinkra-sand">
-              <span className="font-heading text-2xl text-dinkra-green tracking-wider">DINKRA</span>
+            <div className="flex items-center justify-between p-5 border-b border-border">
+              <Link
+                href="/"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center"
+              >
+                <span className="font-heading text-xl font-bold tracking-tight text-brand-navy">My Store</span>
+                <span className="ml-1 inline-block w-1.5 h-1.5 rounded-full bg-brand-coral" aria-hidden />
+              </Link>
               <button
                 ref={mobileMenuCloseRef}
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -154,20 +170,34 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block py-3.5 text-lg font-semibold uppercase tracking-wide border-b border-dinkra-sand/60 text-dinkra-ink hover:text-dinkra-green transition-colors"
+                  className="block py-3.5 text-lg font-semibold border-b border-border/60 text-brand-navy hover:text-brand-coral transition-colors"
                   prefetch={true}
                 >
                   {link.label}
                 </Link>
               ))}
+              <Link
+                href="/search"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block py-3.5 text-base text-brand-navy/70 hover:text-brand-coral transition-colors"
+              >
+                Search
+              </Link>
+              <Link
+                href="/account"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block py-3.5 text-base text-brand-navy/70 hover:text-brand-coral transition-colors"
+              >
+                Account
+              </Link>
             </nav>
-            <div className="p-5 border-t border-dinkra-sand">
+            <div className="p-5 border-t border-border">
               <Link
                 href="/products"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block w-full text-center bg-dinkra-green text-white font-semibold py-3.5 rounded-full uppercase tracking-wide text-sm hover:opacity-90 transition-opacity"
+                className="block w-full text-center bg-brand-navy text-white font-semibold py-3.5 rounded-pill text-sm hover:bg-brand-navy-dark transition-colors"
               >
-                Shop Starter Kits
+                Shop everything
               </Link>
             </div>
           </div>
