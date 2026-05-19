@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { Check, ArrowRight, Download } from 'lucide-react'
 
 /* ─── External listing destination (Etsy / Gumroad) ──────────────── */
