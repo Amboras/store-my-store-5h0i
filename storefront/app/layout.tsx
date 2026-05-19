@@ -30,9 +30,9 @@ const body = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'My Store — Modern Goods, Made With Intention',
+  title: 'CareerUnlocked — AI Prompt Packs That Move Your Career Forward',
   description:
-    'A modern shop for everyday essentials, chosen with care. Free shipping on orders over $75. 30-day returns.',
+    'Battle-tested AI prompt packs for job search, interview prep, LinkedIn, salary negotiation, and career change. Instant download. Lifetime updates. 30-day money-back guarantee.',
 }
 
 export default function RootLayout({
