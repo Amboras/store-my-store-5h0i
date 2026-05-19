@@ -1,20 +1,23 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Instrument_Serif, DM_Sans } from 'next/font/google'
+import { DM_Sans } from 'next/font/google'
 import { Providers } from './providers'
 import { AnalyticsProvider } from '@/components/analytics-provider'
 import { MetaPixelProvider } from '@/components/meta-pixel-provider'
 import { Toaster } from 'sonner'
 import { ElementPickerListener } from '@/components/element-picker-listener'
 import { ErrorBoundary } from '@/components/error-boundary'
+import Header from '@/components/layout/header'
+import Footer from '@/components/layout/footer'
+import AnnouncementBar from '@/components/layout/announcement-bar'
 import dynamic from 'next/dynamic'
 
 const CookieConsent = dynamic(() => import('@/components/cookie-consent'))
 
-const heading = Instrument_Serif({
+/* Single typeface — DM Sans — used for both heading and body. Weight does the work. */
+const display = DM_Sans({
   subsets: ['latin'],
-  weight: ['400'],
-  style: ['normal', 'italic'],
+  weight: ['400', '500', '600', '700', '800'],
   variable: '--font-heading',
   display: 'swap',
 })
@@ -27,9 +30,9 @@ const body = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Land the Job — 50 AI Prompts that Get You Callbacks',
+  title: 'My Store — Modern Goods, Made With Intention',
   description:
-    'Stop sending generic applications that get auto-rejected. 50 copy-paste ChatGPT prompts for resume, cover letter, LinkedIn, interview prep, and salary negotiation. Instant PDF — $27.',
+    'A modern shop for everyday essentials, chosen with care. Free shipping on orders over $75. 30-day returns.',
 }
 
 export default function RootLayout({
@@ -38,10 +41,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${heading.variable} ${body.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${display.variable} ${body.variable}`} suppressHydrationWarning>
       <head>
-        {/* PostHog cross-origin iframe recording shim — records DOM via rrweb and forwards
-            events to the parent window (admin dashboard) for session replay. */}
+        {/* PostHog cross-origin iframe recording shim */}
         <script dangerouslySetInnerHTML={{ __html: `
 (function() {
   'use strict';
@@ -71,9 +73,11 @@ export default function RootLayout({
 })();
         `}} />
       </head>
-      <body className="bg-[#FAF7F2] text-[#0A0A0A] antialiased">
+      <body className="bg-background text-foreground antialiased">
         <Providers>
           <ElementPickerListener />
+          <AnnouncementBar />
+          <Header />
           <main className="min-h-screen">
             <ErrorBoundary>
               <AnalyticsProvider>
@@ -83,6 +87,7 @@ export default function RootLayout({
               </AnalyticsProvider>
             </ErrorBoundary>
           </main>
+          <Footer />
           <CookieConsent />
           <Toaster position="bottom-right" richColors />
         </Providers>
