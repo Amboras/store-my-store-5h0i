@@ -259,26 +259,30 @@ export default function Home() {
               How it works
             </p>
             <h2 className="font-heading font-bold tracking-tight text-brand-navy text-[clamp(2rem,4vw,3rem)] leading-[1.05]">
-              From stuck to hired in three steps.
+              Land more interviews in three simple steps.
             </h2>
+            <p className="mt-5 text-base lg:text-lg text-brand-navy/70 leading-relaxed">
+              No fluff, no setup, no AI experience needed. Just proven prompts that
+              do the heavy lifting on your résumé, cover letter, and interview prep.
+            </p>
           </div>
 
           <ol className="grid md:grid-cols-3 gap-6 lg:gap-8">
             {[
               {
                 step: '01',
-                title: 'Pick your pack',
-                body: 'Choose the moment you&apos;re solving — job hunt, interview, raise, pivot. Every pack ships with a quick-start guide.',
+                title: 'Download your prompts',
+                body: 'Grab the curated prompt collection the moment you check out. Instant access, organized by résumé, cover letter, and interview answers.',
               },
               {
                 step: '02',
-                title: 'Copy a prompt',
-                body: 'Open ChatGPT, Claude, or Gemini. Paste in any prompt. Fill in the blanks. Done in under a minute.',
+                title: 'Paste into ChatGPT',
+                body: 'Pick a prompt, drop in your role and background, and let AI write a standout résumé, tailored cover letter, or sharp interview answers in minutes.',
               },
               {
                 step: '03',
-                title: 'Land the win',
-                body: 'Better resumes. Sharper interview answers. Tighter LinkedIn copy. Higher offers. Then come back for the next one.',
+                title: 'Apply and get noticed',
+                body: 'Send applications that beat the ATS, sound like the best version of you, and pull more recruiter replies than you&apos;ve had in months.',
               },
             ].map((s) => (
               <li key={s.step} className="relative">
@@ -301,7 +305,7 @@ export default function Home() {
               href="/products"
               className="group inline-flex items-center gap-2 rounded-pill bg-brand-navy hover:bg-brand-navy-dark px-7 py-4 text-sm font-semibold text-white transition-colors"
             >
-              Start with a pack
+              Get the prompts
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
             </Link>
           </div>
