@@ -191,7 +191,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-14 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/35">
-            &copy; {new Date().getFullYear()} CareerUnlocked. All rights reserved.
+            &copy; 2026 CareerUnlocked. All rights reserved.
           </p>
           <button
             onClick={() => {
