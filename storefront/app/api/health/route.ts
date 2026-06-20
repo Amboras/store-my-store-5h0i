@@ -1,42 +1,20 @@
 import { NextResponse } from 'next/server'
 
-const REQUIRED_ENV_VARS = [
-  'NEXT_PUBLIC_MEDUSA_BACKEND_URL',
-  'NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY',
-] as const
-
-const OPTIONAL_ENV_VARS = [
-  'NEXT_PUBLIC_STORE_ID',
-  'NEXT_PUBLIC_STRIPE_PUBLIC_KEY',
-  'NEXT_PUBLIC_ANALYTICS_ENDPOINT',
-  'PORT',
-] as const
-
 export async function GET() {
-  const required = REQUIRED_ENV_VARS.map((name) => ({
-    name,
-    configured: Boolean(process.env[name]),
-  }))
+  const backendUrl = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || 'http://localhost:9000'
+  let backendStatus: 'ok' | 'unreachable' = 'unreachable'
 
-  const optional = OPTIONAL_ENV_VARS.map((name) => ({
-    name,
-    configured: Boolean(process.env[name]),
-  }))
+  try {
+    const res = await fetch(`${backendUrl}/health`, { cache: 'no-store' })
+    if (res.ok) backendStatus = 'ok'
+  } catch {
+    backendStatus = 'unreachable'
+  }
 
-  const missing = required.filter((v) => !v.configured).map((v) => v.name)
-  const healthy = missing.length === 0
-
-  return NextResponse.json(
-    {
-      status: healthy ? 'ok' : 'misconfigured',
-      healthy,
-      timestamp: new Date().toISOString(),
-      env: {
-        required,
-        optional,
-        missing,
-      },
-    },
-    { status: healthy ? 200 : 503 },
-  )
+  return NextResponse.json({
+    status: 'ok',
+    backendUrl,
+    backendStatus,
+    timestamp: new Date().toISOString(),
+  })
 }
