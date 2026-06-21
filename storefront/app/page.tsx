@@ -355,6 +355,32 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ─────────────── ABOUT US ─────────────── */}
+      <section className="py-20 lg:py-24 bg-cream-deep/40">
+        <div className="container-custom max-w-3xl text-center">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-coral mb-4">
+            About us
+          </p>
+          <h2 className="font-heading font-bold tracking-tight text-brand-navy text-[clamp(2rem,4vw,3rem)] leading-[1.05]">
+            A small team obsessed with helping people win at work.
+          </h2>
+          <div className="mt-8 space-y-5 text-base lg:text-lg text-brand-navy/75 leading-relaxed text-left sm:text-center">
+            <p>
+              We&apos;re a team of former recruiters, hiring managers, and career coaches who built
+              the resource we always wished existed. After years of watching talented people get
+              overlooked because of weak résumés, generic cover letters, and shaky interview answers,
+              we decided to package the playbook into something anyone can use in minutes.
+            </p>
+            <p>
+              Every prompt in our library is tested on real job hunts and refined with feedback
+              from thousands of professionals. We believe getting ahead in your career shouldn&apos;t
+              depend on knowing the right people or having the right background — it should come down
+              to showing up prepared. That&apos;s what we&apos;re here to help you do.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* ─────────────── COLLECTION SECTIONS (if any) ─────────────── */}
       {hasCollections && featuredCollections.length > 0 && (
         <div>
