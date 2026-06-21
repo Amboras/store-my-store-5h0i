@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 
 export async function GET() {
-  const baseUrl = process.env.METRICS_SERVICE_URL || 'http://localhost:3000'
+  const baseUrl = process.env.METRICS_SERVICE_URL || 'http://localhost:9000'
 
   try {
     const response = await fetch(`${baseUrl}/v1/config`, {
