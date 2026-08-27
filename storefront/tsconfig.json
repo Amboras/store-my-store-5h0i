@@ -33,9 +33,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "next-env.d.ts",
-    ".next/dev/types/**/*.ts",
-    "/dev/shm/.next-ci-047c842ca620/types/**/*.ts",
-    "/dev/shm/.next-ci-047c842ca620/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
